@@ -1,0 +1,14 @@
+VBox{
+    -fx-padding: 30px;
+}
+
+Label{
+    -fx-font-size:14px;
+}
+
+
+
+.titulo{
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}

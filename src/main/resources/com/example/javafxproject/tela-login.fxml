@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<VBox alignment="CENTER_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+fx:controller="com.example.javafxproject.LoginUsuarioController">
+
+   <padding>
+       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+   </padding>
+    
+    <Label text="LOGIN" styleclass="titulo"> <Label/>
+    <Label text="Preencha seus dados:" />
+
+   <Label text="E-mail" />
+   <TextField fx:id="txfEmail" />
+
+   <Label text="Senha" />
+   <TextField fx:id="txfSenha" />
+
+   <CheckBox text="Usuário novo? Faça seu cadastro:" fx:id="ckbCadastro" />
+
+   <VBox alignment="CENTER_RIGHT" spacing="20.0">
+       <Button text="Entrar" onAction="#onActionLogar" />
+   </VBox>
+
+   <stylesheets>
+   <URL Value ="@style.css"/>
+   </stylesheets>
+
+</VBox>

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
-fx:controller="com.example.javafxproject.CadastroController">
+fx:controller="com.example.javafxproject.ProjetoCofrinhoController">
 
     <padding>
         <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
@@ -20,14 +20,25 @@ fx:controller="com.example.javafxproject.CadastroController">
     <Label text="Nome:" />
     <TextField fx:id="nomeTextField" promptText="Insira seu nome completo" />
 
-    <Label text="E-mail:" />
-    <TextField fx:id="emailTextField" promptText="Insira seu e-mail" />
+    <Label text="Descrição:" />
+    <TextField fx:id="descricaoTextField" promptText="Insira aqui uma descrição para seu projeto" />
 
     <Label text="Senha:" />
     <PasswordField fx:id="senhaPasswordField" promptText="Insira sua senha" />
 
-    <Label text="Data de Nascimento:" />
-    <DatePicker fx:id="dataNascimentoDatePicker" />
+    <ChoiceBox fx:id="choiceBoxCategorias">
+        <items>
+            <FXCollections>
+                <String fx:value="Categoria 1" />
+                <String fx:value="Categoria 2" />
+                <String fx:value="Categoria 3" />
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+    
+    <TextField fx:id="textFieldCategoriaPersonalizada" promptText="Categoria personalizada" />
+    
+    <Button fx:id="botaoAdicionarCategoria" text="Adicionar Categoria" />
 
     <Button text="Cadastrar" onAction="#cadastrarUsuario" />
 </VBox>

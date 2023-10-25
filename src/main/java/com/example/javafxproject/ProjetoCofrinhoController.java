@@ -15,22 +15,17 @@ public class ProjetoCofrinhoController {
     private TextField descricaoTextField;
     
     @FXML
-    private PasswordField senhaPasswordField;
-   
+    private Button meuBotao;
+    
     @FXML
-    private Picker dataNascimentoDatePicker;
+    private TextField meuCampoDeTexto;
 
     @FXML
     private void cadastrarUsuario(ActionEvent event) {
     
+        String texto = meuCampoDeTexto.getText();
         String nome = nomeTextField.getText();
-        String email = emailTextField.getText();
-        String senha = senhaPasswordField.getText();
-        String dataNascimento = dataNascimentoDatePicker.getValue().toString();
 
         System.out.println("Nome: " + nome);
-        System.out.println("E-mail: " + email);
-        System.out.println("Senha: " + senha);
-        System.out.println("Data de Nascimento: " + dataNascimento);
     }
 }

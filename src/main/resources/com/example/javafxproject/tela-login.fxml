@@ -7,12 +7,15 @@
 
 <VBox alignment="CENTER_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
 fx:controller="com.example.javafxproject.LoginUsuarioController">
+<!-- sempre colocar esse caminho do controller-->
 
    <padding>
        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
    </padding>
     
-    <Label text="LOGIN" styleclass="titulo"> <Label/>
+    <Label text="LOGIN" styleclass="titulo"> </Label>
+   <!-- o caminho da stylesheet tem que ser definida no final ou inicio do código-->
+
     <Label text="Preencha seus dados:" />
 
    <Label text="E-mail" />
@@ -22,13 +25,14 @@ fx:controller="com.example.javafxproject.LoginUsuarioController">
    <TextField fx:id="txfSenha" />
 
    <CheckBox text="Usuário novo? Faça seu cadastro:" fx:id="ckbCadastro" />
+   <!-- Trocar essa checkBox por um botão-->
 
    <VBox alignment="CENTER_RIGHT" spacing="20.0">
        <Button text="Entrar" onAction="#onActionLogar" />
    </VBox>
 
    <stylesheets>
-   <URL Value ="@style.css"/>
+   <URL value ="@style.css"/>
    </stylesheets>
 
 </VBox>

@@ -18,20 +18,20 @@ fx:controller="com.example.javafxproject.ProjetoCofrinhoController">
     <Label text="Cadastrar novo usuário" /> <!--sempre que for fechar uma propriedade, a barra vem antes dela-->
 
     <Label text="Nome:" />
-    <TextField fx:id="nomeTextField" promptText="Insira seu nome completo" />
+    <TextField fx:id="nomeTextField" promptText="Insira o nome de seu projeto" />
 
     <Label text="Descrição:" />
     <TextField fx:id="descricaoTextField" promptText="Insira aqui uma descrição para seu projeto" />
 
-    <Label text="Senha:" />
-    <PasswordField fx:id="senhaPasswordField" promptText="Insira sua senha" />
+    <!--<Label text="Senha:" />
+    <PasswordField fx:id="senhaPasswordField" promptText="Insira sua senha" />-->
 
     <ChoiceBox fx:id="choiceBoxCategorias">
         <items>
             <FXCollections>
-                <String fx:value="Categoria 1" />
-                <String fx:value="Categoria 2" />
-                <String fx:value="Categoria 3" />
+                <String fx:value="Contas a pagar" />
+                <String fx:value="Alimentação" />
+                <String fx:value="Lazer" />
             </FXCollections>
         </items>
     </ChoiceBox>

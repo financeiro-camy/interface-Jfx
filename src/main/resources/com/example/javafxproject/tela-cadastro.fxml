@@ -27,6 +27,8 @@ fx:controller="com.example.javafxproject.CadastroController">
     <PasswordField fx:id="senhaPasswordField" promptText="Insira sua senha" />
 
     <Label text="Data de Nascimento:" />
+    
+    <!--DATEPICKER É USADO PARA SELECIONAR DATAS-->
     <DatePicker fx:id="dataNascimentoDatePicker" />
 
     <Button text="Cadastrar" onAction="#cadastrarUsuario" />

@@ -6,7 +6,7 @@
 <?import java.net.*?>
 
 <VBox alignment="CENTER_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-fx:controller="com.example.javafxproject.LoginUsuarioController">
+fx:controller="com.example.javafxproject.ContasDinheiroController">
 <!-- sempre colocar esse caminho do controller-->
 
    <padding>
@@ -17,19 +17,16 @@ fx:controller="com.example.javafxproject.LoginUsuarioController">
     <!--Coloque styleClass caso você queira formatar com as mesmas propriedades determinada tela-->
    <!-- o caminho da stylesheet tem que ser definida no final ou inicio do código-->
 
-    <Label text="Preencha seus dados:" />
+    <Label text="Preencha:" />
 
-   <Label text="E-mail" />
-   <TextField fx:id="txfEmail" />
+   <Label text="Nome da conta:" />
+   <TextField fx:id="txfconta_nome" />
 
-   <Label text="Senha" />
-   <TextField fx:id="txfSenha" />
-
-   <CheckBox text="Usuário novo? Faça seu cadastro:" fx:id="ckbCadastro" />
-   <!-- Trocar essa checkBox por um botão-->
+   <Label text="Saldo Inicial:" />
+   <TextField fx:id="txfsaldo_inicial" />
 
    <VBox alignment="CENTER_RIGHT" spacing="20.0">
-       <Button text="Entrar" onAction="#onActionLogar" />
+       <Button text="Criar" onAction="#onActionCriarConta" />
    </VBox>
 
    <stylesheets>

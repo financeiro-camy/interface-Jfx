@@ -17,6 +17,7 @@ public class CadastroController {
    
     @FXML
     private DatePicker dataNascimentoDatePicker;
+    
 
     @FXML
     private void cadastrarUsuario(ActionEvent event) {
@@ -30,5 +31,8 @@ public class CadastroController {
         System.out.println("E-mail: " + email);
         System.out.println("Senha: " + senha);
         System.out.println("Data de Nascimento: " + dataNascimento);
+
+        //terminar de inserir o DAO neste controller:
+
     }
 }

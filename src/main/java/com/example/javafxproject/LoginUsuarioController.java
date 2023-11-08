@@ -14,11 +14,11 @@ public class LoginUsuarioController {
     
 	public void onActionLogar() {
     	String email = txfEmail.getText();
-    	String telefone = txfSenha.getText();
+    	String senha = txfSenha.getText();
     	Boolean aceitaPromocao = ckbCadastro.isSelected();
 
     	System.out.println(email);
-    	System.out.println(telefone);
+    	System.out.println(senha);
 	}
     
 }

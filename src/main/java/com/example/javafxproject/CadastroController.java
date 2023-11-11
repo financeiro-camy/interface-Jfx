@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 import javafx.scene.control.PasswordField;
 import java.io.IOException;
 
+/*import DAO.Usuario;
+import DAO.UsuarioDAO;*/
+
 public class CadastroController {
 
     @FXML
@@ -31,6 +34,11 @@ public class CadastroController {
         System.out.println("Nome: " + nome);
         System.out.println("E-mail: " + email);
         System.out.println("Senha: " + senha);
+
+       /*  Usuario user = new Usuario(nome,email,senha,true);
+        UsuarioDAO userDAO = new UsuarioDAO();
+        userDAO.create(user);*/
+
     }
 
     public void OnActionLogin() throws IOException{

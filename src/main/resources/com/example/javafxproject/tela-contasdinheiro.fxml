@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
+
+
+<VBox alignment="CENTER_LEFT" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
+     fx:controller="com.example.javafxproject.ContasDinheiroController">
+
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+
+    <VBox alignment="CENTER" spacing="10.0">
+         <Label text="Adicione sua Conta" styleClass="titulo"/>
+         <Label text="Utilize o formulário abaixo para realizar seu cadastro de sua conta." />
+    </VBox>
+
+    <Label text="Nome:" />
+    <TextField fx:id="txfContaNome" promptText="Insira o nome da sua conta " />
+
+    <Label text="Descrição:" />
+    <TextField fx:id="txfDescricao" promptText="Insira aqui uma descrição da sua conta" />
+
+    <Label text="Saldo Inicial:" />
+    <TextField fx:id="txfSaldoInicial" promptText="Defina o valor do saldo inicial"/>
+
+    <Label text="Data de Inserção:" />
+    <DatePicker fx:id="dataSaldo" promptText="Data de inserção do valor inicial"/>
+
+    <VBox alignment="CENTER_RIGHT" spacing="10.0">
+        <Button text="Criar Conta" onAction="#criarConta" />
+    </VBox>
+
+     <stylesheets>
+   <URL value ="@style.css"/>
+   </stylesheets>
+</VBox>

@@ -13,16 +13,22 @@ import javafx.scene.control.PasswordField;
 public class LoginUsuarioController {
 	@FXML
 	private TextField txfEmail;
-	
+
 	@FXML
 	private PasswordField txfSenha;
 
-	public void Entrar() {
+	public void Entrar() throws IOException {
     	String email = txfEmail.getText();
     	String senha = txfSenha.getText();
 
-    	System.out.println(email);
-    	System.out.println(senha);
+    	FXMLLoader loader = new FXMLLoader(MainController.class.getResource("menu.fxml"));
+		Scene scene = new Scene(loader.load());
+		Stage stage = new Stage();
+		stage.setTitle("Menu");
+		stage.setScene(scene);
+		stage.sizeToScene();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.showAndWait();
 	}
     
 	public void OnActionCadastar() throws IOException{

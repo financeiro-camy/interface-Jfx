@@ -8,6 +8,7 @@
 fx:controller="com.example.javafxproject.MainController">
 
 <Button text="Adicionar Projeto Cofrinho" onAction="#onAbrirProjetoCofrinho" />
+<Button text="Adicionar Conta" onAction="#onContaDinheiro" />
 
 <stylesheets>
 <URL value="@style.css" />

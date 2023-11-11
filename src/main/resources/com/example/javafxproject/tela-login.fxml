@@ -22,7 +22,7 @@
     </padding>
 
     <VBox alignment="CENTER" spacing="10.0">
-        <Label text="Login" styleClass="titulo"/>
+        <Label text="Iniciar Sessão" styleClass="titulo"/>
         <Label text="Realize o seu login preenchendo o formulário abaixo!." />
     </VBox>
 

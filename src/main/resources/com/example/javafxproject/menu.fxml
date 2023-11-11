@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import java.net.*?>
+
+<HBox alignment="CENTER" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
+fx:controller="com.example.javafxproject.MainController">
+
+<Button text="Adicionar Projeto Cofrinho" onAction="#onAbrirProjetoCofrinho" />
+
+<stylesheets>
+<URL value="@style.css" />
+</stylesheets>
+</HBox>

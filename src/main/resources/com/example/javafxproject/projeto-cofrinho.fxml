@@ -2,21 +2,25 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Button?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
-fx:controller="com.example.javafxproject.ProjetoCofrinhoController">
+
+<VBox alignment="CENTER_LEFT" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
+     fx:controller="com.example.javafxproject.ProjetoCofrinhoController">
 
     <padding>
         <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
     </padding>
 
-    <Label text="Criar novo projeto" /> <!--sempre que for fechar uma propriedade, a barra vem antes dela-->
+    <VBox alignment="CENTER" spacing="10.0">
+         <Label text="Criar novo projeto" styleClass="titulo"/>
+         <Label text="Utilize o formulário abaixo para realizar seu cadastro de seu novo projeto." />
+    </VBox>
 
     <Label text="Nome:" />
     <TextField fx:id="nomeTextField" promptText="Insira o nome de seu projeto" />
@@ -25,29 +29,21 @@ fx:controller="com.example.javafxproject.ProjetoCofrinhoController">
     <TextField fx:id="descricaoTextField" promptText="Insira aqui uma descrição para seu projeto" />
 
     <Label text="Prazo:" />
-    <DatePicker fx:id="prazo" promptText="defina seu prazo"/>
+    <DatePicker fx:id="prazo" promptText="Defina a prazo para atingir a sua meta"/>
 
     <Label text="Data da criação:" />
-    <DatePicker fx:id="data_criacao" promptText="defina"/> <!--USAREMOS A FUNÇÃO NOW PARA DEIXAR AUTOMÁTICO ASSIM QUE O USUÁRIO CRIAR O PROJETO-->
-    
+    <DatePicker fx:id="data_criacao" promptText="Data da criação"/>
+
     <Label text="Valor da meta:" />
-    <TextField fx:id="metaQuantiaField" />
+    <TextField fx:id="metaQuantiaField" promptText="Defina o valor a ser atingido"/>
 
-    <CheckBox text="Este projeto está ativo?" fx:id="ckbAtivo" /> <!-- Consta erro nesta linha-->
+    <CheckBox text="Este projeto está ativo?" fx:id="ckbAtivo" />
 
-    <!--<ChoiceBox fx:id="choiceBoxCategorias">
-        <items>
-            <FXCollections>
-                <String fx:value="Contas a pagar" />
-                <String fx:value="Alimentação" />
-                <String fx:value="Lazer" />
-            </FXCollections>
-        </items>
-    </ChoiceBox> -->
-    
-   <!-- <TextField fx:id="textFieldCategoriaPersonalizada" promptText="Categoria personalizada" />
-    
-    <Button fx:id="botaoAdicionarCategoria" text="Adicionar Categoria" />-->
+    <VBox alignment="CENTER_RIGHT" spacing="10.0">
+        <Button text="Criar" onAction="#criarProjeto" />
+    </VBox>
 
-    <Button text="Criar" onAction="#criarProjeto" />
+     <stylesheets>
+   <URL value ="@style.css"/>
+   </stylesheets>
 </VBox>

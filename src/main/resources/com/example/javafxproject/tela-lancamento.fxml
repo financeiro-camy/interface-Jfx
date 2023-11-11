@@ -21,8 +21,6 @@
     <Label text="ID Conta:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
     <TextField fx:id="idContaField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <!-- Adicione mais campos para outros atributos do lançamento -->
-
     <Button text="Salvar" onAction="#salvarLancamento" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
     <Button text="Cancelar" onAction="#cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 

@@ -9,8 +9,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.PasswordField;
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
-
 public class CadastroController {
 
     @FXML

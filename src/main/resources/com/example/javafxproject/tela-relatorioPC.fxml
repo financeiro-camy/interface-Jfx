@@ -9,6 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import java.net.*?>
 
+<!--O relatório precisa trabalhar como um histórico de todas as quantias previamente inseridas pelo usuário, 
+    contando o dia que foi lançada a quantia, qual foi o rendimento da aplicação para o projeto (quanto falta
+    para conclusão) e como -->
 
 <VBox alignment="CENTER_LEFT" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
      fx:controller="com.example.javafxproject.RelatorioPCController">
@@ -18,8 +21,8 @@
     </padding>
 
     <VBox alignment="CENTER" spacing="10.0">
-         <Label text="Inserir Quantia" styleClass="titulo"/>
-         <Label text="Realize a inserção de um valor no seu projeto!." />
+         <Label text="Inserir quantia" styleClass="titulo"/>
+         <Label text="Realize a inserção de um valor no seu projeto:" />
     </VBox>
 
     <Label text="Valor da Quantia:" />

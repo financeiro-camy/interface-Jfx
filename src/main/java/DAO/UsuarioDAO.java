@@ -1,5 +1,5 @@
-package DAO;
- 
+/*package DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,33 +10,37 @@ import java.util.List;
 
 public class UsuarioDAO {
     public Usuario create(Usuario usuario) throws SQLException {
-        String sql = """
-            INSERT INTO Usuario (id, nome, email, senha, ativo)
-            VALUES (?, ?, ?, ?, ?);
-        """;
+        String sql = "INSERT INTO Usuario (nome, email, senha, ativo) VALUES (?, ?, ?, ?)";
 
         try (
             Connection connection = Conexao.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ) {
-            statement.setInt(1, usuario.getId());
-            statement.setString(2, usuario.getNome());
-            statement.setString(3, usuario.getEmail());
-            statement.setString(4, usuario.getSenha());
-            statement.setBoolean(5, usuario.isAtivo());
+            statement.setString(1, usuario.getNome());
+            statement.setString(2, usuario.getEmail());
+            statement.setString(3, usuario.getSenha());
+            statement.setBoolean(4, usuario.isAtivo());
 
-            statement.executeUpdate();
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("A inserção falhou, nenhum registro foi adicionado.");
+            }
+
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    usuario.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("A inserção falhou, nenhum ID foi retornado.");
+                }
+            }
 
             return usuario;
         }
     }
 
     public Usuario update(Usuario usuario) throws SQLException {
-        String sql = """
-            UPDATE Usuario
-            SET nome = ?, email = ?, senha = ?, ativo = ?
-            WHERE id = ?;
-        """;
+        String sql = "UPDATE Usuario SET nome = ?, email = ?, senha = ?, ativo = ? WHERE id = ?";
 
         try (
             Connection connection = Conexao.getConnection();
@@ -48,58 +52,53 @@ public class UsuarioDAO {
             statement.setBoolean(4, usuario.isAtivo());
             statement.setInt(5, usuario.getId());
 
-            statement.executeUpdate();
+            int affectedRows = statement.executeUpdate();
 
-            return usuario;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-
-    public void delete(int id) {
-        String sql = "DELETE FROM Usuario WHERE id = ?;";
-
-        try (
-            Connection connection = Conexao.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-        ) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void delete(Usuario usuario) {
-        delete(usuario.getId());
-    }
-
-    public Usuario findById(int id) {
-        String sql = "SELECT * FROM Usuario WHERE id = ?;";
-
-        try (
-            Connection connection = Conexao.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-        ) {
-            statement.setInt(1, id);
-
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                return resultSetToUsuario(rs);
+            if (affectedRows == 0) {
+                throw new SQLException("A atualização falhou, nenhum registro foi modificado.");
             }
 
-            rs.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            return usuario;
+        }
+    }
+
+    public void delete(int id) throws SQLException {
+        String sql = "DELETE FROM Usuario WHERE id = ?";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, id);
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("A exclusão falhou, nenhum registro foi removido.");
+            }
+        }
+    }
+
+    public Usuario findById(int id) throws SQLException {
+        String sql = "SELECT * FROM Usuario WHERE id = ?";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, id);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return resultSetToUsuario(rs);
+                }
+            }
         }
 
         return null;
     }
 
-    public List<Usuario> findAll() {
-        String sql = "SELECT * FROM Usuario;";
+    public List<Usuario> findAll() throws SQLException {
+        String sql = "SELECT * FROM Usuario";
         List<Usuario> usuarios = new ArrayList<>();
 
         try (
@@ -112,9 +111,6 @@ public class UsuarioDAO {
             }
 
             return usuarios;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
         }
     }
 

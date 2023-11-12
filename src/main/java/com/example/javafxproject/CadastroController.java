@@ -28,7 +28,7 @@ public class CadastroController {
        
 
     @FXML
-    public void Cadastrar() {
+    public void Cadastrar() throws IOException {
     
         String nome = txfNome.getText();
         String email = txfEmail.getText();
@@ -44,6 +44,23 @@ public class CadastroController {
         UsuarioDAO userDAO = new UsuarioDAO();
         userDAO.create(user);*/
 
+        exibirAlerta("Só mais 1 passo!", "Nome, email e senha cadastrados com sucesso! Agora cadastre uma conta para as suas transações!");
+
+        CriarPrimeiraConta();
+
+    }
+
+    public void CriarPrimeiraConta() throws IOException{
+
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-contasdinheiro2.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Login");
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+
     }
 
     public void OnActionLogin() throws IOException{
@@ -57,6 +74,14 @@ public class CadastroController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
 
+    }
+
+    public void exibirAlerta(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 
 

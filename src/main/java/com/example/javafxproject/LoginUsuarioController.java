@@ -30,7 +30,7 @@ public class LoginUsuarioController {
     }
     
 	public void OnActionCadastar() throws IOException{
-		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-cadastro.fxml"));
+		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-cadastro2.fxml"));
 		Scene scene = new Scene(loader.load());
 		Stage stage = new Stage();
 		stage.setTitle("Cadastro");

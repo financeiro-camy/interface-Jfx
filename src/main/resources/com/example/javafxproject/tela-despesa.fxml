@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="com.example.javafxproject.DespesaController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #ffff;" VBox.vgrow="ALWAYS">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1fbd91" height="25.0" stroke="BLACK" strokeType="INSIDE" width="641.0" />
+            <Label layoutX="227.0" layoutY="42.0" text="Cadastrar despesa">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Button layoutX="510.0" layoutY="338.0" mnemonicParsing="false" onAction="#AdicionarDespesa" prefHeight="38.0" prefWidth="117.0" style="-fx-base: #EF7AE3;" text="Adicionar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <TextField fx:id="nomeDespesa" layoutX="51.0" layoutY="136.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o nome de sua despesa aqui" />
+            <Label layoutX="51.0" layoutY="116.0" text="Nome: * ">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="169.0" text="Valor: *">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="valorDespesa" layoutX="51.0" layoutY="188.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o valor da despesa aqui" />
+            <TextField fx:id="descricaoDespesa" layoutX="343.0" layoutY="188.0" prefHeight="64.0" prefWidth="230.0" promptText="Escreva uma breve descrição da despesa" />
+            <Label layoutX="343.0" layoutY="169.0" text="Descrição:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Button layoutX="29.0" layoutY="338.0" mnemonicParsing="false" onAction="#VoltarMenu" prefHeight="38.0" prefWidth="134.0" style="-fx-base: #EF7AE3;" text="Voltar para o menu" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <DatePicker fx:id="dataVencimento" layoutX="343.0" layoutY="137.0" prefHeight="26.0" prefWidth="230.0" promptText="Selecione a data de vencimento" />
+            <Label layoutX="343.0" layoutY="116.0" text="Data de vencimento: *">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="despesaCKB" layoutX="50.0" layoutY="234.0" mnemonicParsing="false" text="Já foi paga? *">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <Label layoutX="216.0" layoutY="82.0" text="Realize o cadastro de sua despesa!" textAlignment="CENTER">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="50.0" layoutY="270.0" text="Data do pagamento: ">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dataPagamento" layoutX="51.0" layoutY="289.0" prefHeight="26.0" prefWidth="230.0" promptText="Selecione a data do pagemento" />
+            <Label layoutX="343.0" layoutY="270.0" text="Número de Parcelas">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="numeroParcelas" layoutX="343.0" layoutY="289.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o numero de parcelas" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

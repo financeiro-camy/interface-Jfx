@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.PasswordField?>
+
+
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
 fx:controller="com.example.javafxproject.LoginUsuarioController">
@@ -55,39 +60,53 @@ fx:controller="com.example.javafxproject.LoginUsuarioController">
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: FFFFFF;" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />
           </font>
         </Label>
-            <TextField layoutX="93.0" layoutY="123.0" prefHeight="26.0" prefWidth="436.0" fx:id="txfEmail" promptText="Insira aqui o seu endereço de email" />
-            <PasswordField fx:id="txfSenha" layoutX="93.0" layoutY="191.0" prefHeight="26.0" prefWidth="436.0" promptText="Insira aqui a sua senha" />
-            <Button layoutX="529.0" layoutY="309.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Entrar" onAction="#Entrar" />
-
-            <Button layoutX="66.0" layoutY="309.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" 
-            text="Cadastre-se" onAction="#OnActionCadastar"/>
-            <Label layoutX="235.0" layoutY="49.0" prefHeight="42.0" prefWidth="170.0" text="Iniciar Sessão" textAlignment="CENTER">
+            <TextField fx:id="txfEmail" layoutX="272.0" layoutY="127.0" prefHeight="26.0" prefWidth="346.0" promptText="Insira aqui o seu endereço de email" />
+            <PasswordField fx:id="txfSenha" layoutX="272.0" layoutY="198.0" prefHeight="26.0" prefWidth="346.0" promptText="Insira aqui a sua senha" />
+            <Button layoutX="551.0" layoutY="309.0" mnemonicParsing="false" onAction="#Entrar" prefHeight="26.0" prefWidth="66.0" style="-fx-alignment: 88D5AA;" text="Entrar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button layoutX="269.0" layoutY="309.0" mnemonicParsing="false" onAction="#OnActionCadastar" prefHeight="26.0" prefWidth="88.0" text="Cadastre-se">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Label layoutX="366.0" layoutY="42.0" prefHeight="42.0" prefWidth="170.0" text="Iniciar Sessão" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="38.0" layoutY="286.0" text="Não possui cadastro ainda?" textAlignment="CENTER">
+            <Label layoutX="269.0" layoutY="281.0" text="Não possui cadastro ainda?" textAlignment="CENTER">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="93.0" layoutY="99.0" text="Email">
+            <Label layoutX="272.0" layoutY="96.0" text="Email">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="93.0" layoutY="166.0" text="Senha">
+            <Label layoutX="269.0" layoutY="166.0" text="Senha">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
+            <SplitPane dividerPositions="0.5" layoutX="2.0" layoutY="-1.0" prefHeight="374.0" prefWidth="244.0" style="-fx-background-color: FFFFFF;">
+               <items>
+                  <ImageView fitHeight="268.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="199.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Nova-pasta/Captura-de-Tela-(199).png" />
+                     </image>
+                  </ImageView>
+               </items>
+            </SplitPane>
       </children>
     </AnchorPane>
   </children>

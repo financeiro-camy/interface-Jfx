@@ -49,7 +49,7 @@ public class LoginUsuarioController {
     }
 
 	public void AbrirMenu() throws IOException{
-	FXMLLoader loader = new FXMLLoader(MainController.class.getResource("menu.fxml"));
+	FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-menu2.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setTitle("Menu");

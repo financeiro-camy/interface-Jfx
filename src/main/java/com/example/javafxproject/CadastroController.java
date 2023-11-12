@@ -48,7 +48,7 @@ public class CadastroController {
 
     public void OnActionLogin() throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-login.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-login2.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
         stage.setTitle("Login");

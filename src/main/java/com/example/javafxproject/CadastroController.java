@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.PasswordField;
+
 import java.io.IOException;
 
 /*import DAO.Usuario;
@@ -22,6 +22,9 @@ public class CadastroController {
     
     @FXML
     private PasswordField txfSenha;
+
+    @FXML
+    private PasswordField txfSenhaTeste;
        
 
     @FXML
@@ -30,10 +33,12 @@ public class CadastroController {
         String nome = txfNome.getText();
         String email = txfEmail.getText();
         String senha = txfSenha.getText();
+        String senhaTeste = txfSenhaTeste.getText();
 
         System.out.println("Nome: " + nome);
         System.out.println("E-mail: " + email);
         System.out.println("Senha: " + senha);
+        System.out.println("Senha confirmada é:" + senhaTeste);
 
        /*  Usuario user = new Usuario(nome,email,senha,true);
         UsuarioDAO userDAO = new UsuarioDAO();

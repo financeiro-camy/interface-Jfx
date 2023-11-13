@@ -26,7 +26,7 @@ fx:controller="com.example.javafxproject.DespesaController">
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="nomeDespesa" layoutX="51.0" layoutY="136.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o nome de sua despesa aqui" />
+            <TextField fx:id="nomeDespesa" layoutX="51.0" layoutY="136.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o nome de sua despesa aqui" style="-fx-border-color: #ff1fbd91;" />
             <Label layoutX="51.0" layoutY="116.0" text="Nome: * ">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -37,8 +37,8 @@ fx:controller="com.example.javafxproject.DespesaController">
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="valorDespesa" layoutX="51.0" layoutY="188.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o valor da despesa aqui" />
-            <TextField fx:id="descricaoDespesa" layoutX="343.0" layoutY="188.0" prefHeight="64.0" prefWidth="230.0" promptText="Escreva uma breve descrição da despesa" />
+            <TextField fx:id="valorDespesa" layoutX="51.0" layoutY="188.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o valor da despesa aqui" style="-fx-border-color: #ff1fbd91;"  />
+            <TextField fx:id="descricaoDespesa" layoutX="343.0" layoutY="188.0" prefHeight="64.0" prefWidth="230.0" promptText="Escreva uma breve descrição da despesa" style="-fx-border-color: #ff1fbd91;" />
             <Label layoutX="343.0" layoutY="169.0" text="Descrição:">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -49,7 +49,7 @@ fx:controller="com.example.javafxproject.DespesaController">
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <DatePicker fx:id="dataVencimento" layoutX="343.0" layoutY="137.0" prefHeight="26.0" prefWidth="230.0" promptText="Selecione a data de vencimento" />
+            <DatePicker fx:id="dataVencimento" layoutX="343.0" layoutY="137.0" prefHeight="26.0" prefWidth="230.0" promptText="Selecione a data de vencimento" style="-fx-border-color: #ff1fbd91;" />
             <Label layoutX="343.0" layoutY="116.0" text="Data de vencimento: *">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -70,13 +70,13 @@ fx:controller="com.example.javafxproject.DespesaController">
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <DatePicker fx:id="dataPagamento" layoutX="51.0" layoutY="289.0" prefHeight="26.0" prefWidth="230.0" promptText="Selecione a data do pagemento" />
+            <DatePicker fx:id="dataPagamento" layoutX="51.0" layoutY="289.0" prefHeight="26.0" prefWidth="230.0" promptText="Selecione a data do pagemento" style="-fx-border-color: #ff1fbd91;"  />
             <Label layoutX="343.0" layoutY="270.0" text="Número de Parcelas">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="numeroParcelas" layoutX="343.0" layoutY="289.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o numero de parcelas" />
+            <TextField fx:id="numeroParcelas" layoutX="343.0" layoutY="289.0" prefHeight="26.0" prefWidth="230.0" promptText="Digite o numero de parcelas" style="-fx-border-color: #ff1fbd91;" />
          </children>
     </AnchorPane>
   </children>

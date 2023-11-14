@@ -114,6 +114,30 @@ public class UsuarioDAO {
         }
     }
 
+    public Usuario findByEmail(String email) {
+        String sql = "SELECT * FROM Usuario WHERE email = ?;";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setString(1, email);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return resultSetToUsuario(rs);
+            }
+
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
+    }
+
     private Usuario resultSetToUsuario(ResultSet rs) throws SQLException {
         return new Usuario(
             rs.getInt("id"),

@@ -1,7 +1,10 @@
 package com.example.javafxproject;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import DAO.Usuario;
+import DAO.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,14 +21,21 @@ public class LoginUsuarioController {
 	@FXML
 	private PasswordField txfSenha;
 
-	public void Entrar() throws IOException {
+	public void Entrar() throws IOException, SQLException {
     	String email = txfEmail.getText();
     	String senha = txfSenha.getText();
 
 		if (email.isEmpty() || senha.isEmpty()) {
             exibirAlerta("Campos Vazios", "Email e senha são obrigatórios");
         } else {
-            AbrirMenu();
+			int idlogado = fazerLogin(email, senha);
+			if (idlogado != -1) {
+				 exibirAlerta("Login Bem Sucedido", "Login foi relizado com sucesso!");
+
+				 AbrirMenu();
+			} else {
+				exibirAlerta("Login falhou","Login falhou. Verifique suas credenciais");
+			}
         }
     }
     
@@ -58,5 +68,15 @@ public class LoginUsuarioController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
 	}
+
+	public static int fazerLogin(String email, String senha) throws SQLException {
+        UsuarioDAO userDAO = new UsuarioDAO();
+        Usuario user = userDAO.findByEmail(email);
+
+        if (user != null && user.isAtivo() && user.getSenha().equals(senha)) {
+            return user.getId();
+        }
+        return -1;
+    }
 }
 

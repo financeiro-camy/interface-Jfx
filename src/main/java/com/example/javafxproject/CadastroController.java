@@ -35,11 +35,6 @@ public class CadastroController {
         String senha = txfSenha.getText();
         String senhaTeste = txfSenhaTeste.getText();
 
-        System.out.println("Nome: " + nome);
-        System.out.println("E-mail: " + email);
-        System.out.println("Senha: " + senha);
-        System.out.println("Senha confirmada é:" + senhaTeste);
-
         Usuario user = new Usuario(nome,email,senha,true);
         UsuarioDAO userDAO = new UsuarioDAO();
         userDAO.create(user);

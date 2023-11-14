@@ -6,13 +6,11 @@ import java.sql.SQLException;
 import DAO.Usuario;
 import DAO.UsuarioDAO;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
+
+import com.example.Propriedades;
 
 public class LoginUsuarioController {
 	@FXML
@@ -21,7 +19,9 @@ public class LoginUsuarioController {
 	@FXML
 	private PasswordField txfSenha;
 
+
 	public void Entrar() throws IOException, SQLException {
+
     	String email = txfEmail.getText();
     	String senha = txfSenha.getText();
 
@@ -33,6 +33,7 @@ public class LoginUsuarioController {
 				 exibirAlerta("Login Bem Sucedido", "Login foi relizado com sucesso!");
 
 				 AbrirMenu();
+
 			} else {
 				exibirAlerta("Login falhou","Login falhou. Verifique suas credenciais");
 			}
@@ -40,14 +41,8 @@ public class LoginUsuarioController {
     }
     
 	public void OnActionCadastar() throws IOException{
-		FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-cadastro2.fxml"));
-		Scene scene = new Scene(loader.load());
-		Stage stage = new Stage();
-		stage.setTitle("Cadastro");
-		stage.setScene(scene);
-		stage.sizeToScene();
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.showAndWait();
+		Propriedades propriedades = new Propriedades();
+		propriedades.ScreenGuider("tela-cadastro2.fxml","Cadastro");
 	}
 
 	private void exibirAlerta(String titulo, String mensagem) {
@@ -59,14 +54,8 @@ public class LoginUsuarioController {
     }
 
 	public void AbrirMenu() throws IOException{
-	FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-menu2.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = new Stage();
-            stage.setTitle("Menu");
-            stage.setScene(scene);
-            stage.sizeToScene();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
+	  Propriedades propriedades = new Propriedades();
+	  propriedades.ScreenGuider("tela-menu2.fxml","Menu");
 	}
 
 	public static int fazerLogin(String email, String senha) throws SQLException {

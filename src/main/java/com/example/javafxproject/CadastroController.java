@@ -1,12 +1,11 @@
 package com.example.javafxproject;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import java.sql.SQLException;
+
+import com.example.Propriedades;
+
 import java.io.IOException;
 import DAO.Usuario;
 import DAO.UsuarioDAO;
@@ -46,26 +45,14 @@ public class CadastroController {
 
     public void CriarPrimeiraConta() throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-contasdinheiro2.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+        Propriedades propriedades = new Propriedades();
+        propriedades.ScreenGuider("tela-contasdinheiro2.fxml","Cadastrar conta");
     }
 
     public void OnActionLogin() throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-login2.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+        Propriedades propriedades = new Propriedades();
+        propriedades.ScreenGuider("tela-login2.fxml","Login");
     }
 
     public void exibirAlerta(String titulo, String mensagem) {

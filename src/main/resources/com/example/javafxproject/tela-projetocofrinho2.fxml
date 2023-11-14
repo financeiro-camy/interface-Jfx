@@ -121,9 +121,9 @@
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
-               <effect>
+               <!--<effect>
                   <Bloom threshold="0.0" />
-               </effect>
+               </effect>-->
             </Button>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="198.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="70.0" fitWidth="95.0" layoutX="235.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />

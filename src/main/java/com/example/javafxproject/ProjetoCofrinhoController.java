@@ -43,4 +43,8 @@ public class ProjetoCofrinhoController {
         System.out.println("Status: " + projetoAtivo);
            
 }
+
+    public void MenuPC(){
+        System.out.println("Loading...");
+    }
 }

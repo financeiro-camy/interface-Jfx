@@ -108,28 +108,30 @@ public class CategoriaDAO {
         return null;
     }
 
-    public List<Categoria> findAll() {
-        String sql = "SELECT * FROM Categoria;";
+    public List<Categoria> findAll(int idUsuario) {
+        String sql = "SELECT * FROM Categoria WHERE id_usuario = ?;";
         List<Categoria> categorias = new ArrayList<>();
-
+    
         try (
             Connection connection = Conexao.getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
         ) {
-            while(rs.next()) {
-                categorias.add(resultSetToCategoria(rs));
+            statement.setInt(1, idUsuario);
+    
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    categorias.add(resultSetToCategoria(rs));
+                }
             }
-
+    
             return categorias;
-        
+    
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
-        
     }
+    
 
     private Categoria resultSetToCategoria(ResultSet rs) throws SQLException {
         return new Categoria(

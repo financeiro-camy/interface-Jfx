@@ -48,7 +48,7 @@ public class DespesaController {
 
     public void carregarCategorias() {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        List<Categoria> categorias = categoriaDAO.findAll(2);
+        List<Categoria> categorias = categoriaDAO.findAll(1);
 
         categoriaComboBox.getItems().clear();
 

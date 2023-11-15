@@ -41,7 +41,7 @@ public class CadastroController {
         userDAO.create(user);
 
         int id_usuario = user.getId();
-        setoresPadroes(id_usuario);
+        //setoresPadroes(id_usuario);
 
         exibirAlerta("Só mais 1 passo!", "Nome, email e senha cadastrados com sucesso! Agora cadastre uma conta para as suas transações!");
 

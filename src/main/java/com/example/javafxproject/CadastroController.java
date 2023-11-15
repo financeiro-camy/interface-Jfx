@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.example.Propriedades;
 
 import java.io.IOException;
@@ -36,7 +38,9 @@ public class CadastroController {
         String senha = txfSenha.getText();
         String senhaTeste = txfSenhaTeste.getText();
 
-        Usuario user = new Usuario(nome,email,senha,true);
+        String hashedPassword = BCrypt.hashpw(senha, BCrypt.gensalt());
+
+        Usuario user = new Usuario(nome,email, hashedPassword,true);
         UsuarioDAO userDAO = new UsuarioDAO();
         userDAO.create(user);
 

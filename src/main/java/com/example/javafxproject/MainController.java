@@ -14,7 +14,7 @@ public class MainController {
 
 @FXML
 protected void onAbrirProjetoCofrinho() throws IOException {
-FXMLLoader loader = new FXMLLoader(MainController.class.getResource("projeto-cofrinho.fxml"));
+FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-login2.fxml"));
 Scene scene = new Scene(loader.load());
 Stage stage = new Stage();
 stage.setTitle("Projeto Cofrinho");

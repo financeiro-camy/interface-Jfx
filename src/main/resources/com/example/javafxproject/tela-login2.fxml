@@ -101,8 +101,9 @@ fx:controller="com.example.javafxproject.LoginUsuarioController">
                <items>
                   <ImageView fitHeight="268.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="199.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
+                     <!-- COLOCAR CAMINHO DA FOTO CERTA PORQUE O VSCODE ESTÁ DE PALHAÇADA -->
                      <image>
-                        <Image url="@Captura%20de%20Tela%20(199).png" />
+                        <Image url="@Logo investimentos chamativa laranja.png" />
                      </image>
                   </ImageView>
                </items>
@@ -111,4 +112,3 @@ fx:controller="com.example.javafxproject.LoginUsuarioController">
     </AnchorPane>
   </children>
 </VBox>
-

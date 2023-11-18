@@ -29,6 +29,7 @@ public class CadastroController {
     @FXML
     private PasswordField txfSenhaTeste;
        
+    Propriedades propriedades = new Propriedades();
 
     @FXML
     public void Cadastrar() throws IOException, SQLException  {
@@ -47,30 +48,20 @@ public class CadastroController {
         int id_usuario = user.getId();
         //setoresPadroes(id_usuario);
 
-        exibirAlerta("Só mais 1 passo!", "Nome, email e senha cadastrados com sucesso! Agora cadastre uma conta para as suas transações!");
+        propriedades.exibirAlerta("Agora faça o seu primeiro login!", "Nome, email e senha cadastrados com sucesso! Agora inicie a sua sessão na tela login!");
 
         CriarPrimeiraConta();
     }
 
     public void CriarPrimeiraConta() throws IOException{
-
-        Propriedades propriedades = new Propriedades();
-        propriedades.ScreenGuider("tela-contasdinheiro2.fxml","Cadastrar conta");
+        propriedades.ScreenGuider("tela-login2.fxml","Fazer login");
     }
 
     public void OnActionLogin() throws IOException{
 
-        Propriedades propriedades = new Propriedades();
         propriedades.ScreenGuider("tela-login2.fxml","Login");
     }
 
-    public void exibirAlerta(String titulo, String mensagem) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
-    }
 
     public void setoresPadroes(int id_usuario) throws SQLException {
         System.out.println("ID do Usuário: " + id_usuario);

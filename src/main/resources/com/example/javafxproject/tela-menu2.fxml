@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.MenuController"  >
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -61,7 +61,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="67.0" prefWidth="641.0" style="-fx-background-color: #FFFF;">
                      <children>
-                        <Label layoutX="236.0" layoutY="21.0" text="Seja bem-vindo!">
+                        <Label fx:id="mensagemBemVindo" layoutX="236.0" layoutY="21.0" text="Seja bem-vindo!">
                            <font>
                               <Font name="System Bold Italic" size="22.0" />
                            </font>

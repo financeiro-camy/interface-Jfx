@@ -138,6 +138,46 @@ public class UsuarioDAO {
         return null;
     }
 
+    public String findUserNameById(int id) throws SQLException {
+        String sql = "SELECT nome FROM Usuario WHERE id = ?";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, id);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("nome");
+                }
+            }
+        }
+
+        return null; 
+    }
+
+    public boolean verificarContaDoUsuario(int idUsuario) {
+        String consulta = "SELECT COUNT(*) AS total_contas FROM ContasDinheiro WHERE id_usuario = ?";
+
+        try (Connection connection = Conexao.getConnection();
+             PreparedStatement statement = connection.prepareStatement(consulta)) {
+
+            statement.setInt(1, idUsuario);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int totalContas = resultSet.getInt("total_contas");
+                return totalContas > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    
     private Usuario resultSetToUsuario(ResultSet rs) throws SQLException {
         return new Usuario(
             rs.getInt("id"),

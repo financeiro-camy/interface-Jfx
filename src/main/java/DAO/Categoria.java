@@ -5,11 +5,11 @@ public class Categoria {
     private int id_usuario;
     private String nome;
 
-/*public Categoria (int id, int id_usuario, String nome){
+    public Categoria (int id, int id_usuario, String nome){
     this.id = id;
     this.id_usuario = id_usuario;
     this.nome = nome;
-  }*/
+  }
 
 public Categoria (int id_usuario, String nome){
     this.id = id_usuario;

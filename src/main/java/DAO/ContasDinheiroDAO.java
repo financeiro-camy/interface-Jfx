@@ -34,10 +34,8 @@ public class ContasDinheiroDAO {
     
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    // Obtém o ID gerado automaticamente
                     int idGerado = generatedKeys.getInt(1);
                     
-                    // Atualiza o objeto Usuario com o ID gerado
                     conta.setId(idGerado);
                 } else {
                     throw new SQLException("Falha ao criar o usuário. Nenhum ID foi gerado.");

@@ -7,12 +7,16 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.example.Propriedades;
+
 import DAO.Categoria;
 import DAO.CategoriaDAO;
+import DAO.UsuarioAtributoDAO;
 
 
 public class DespesaController {
@@ -41,21 +45,40 @@ public class DespesaController {
     @FXML
     private ComboBox<String> categoriaComboBox;
 
+    private Propriedades propriedades = new Propriedades();
+
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
         carregarCategorias();
     }
 
-    public void carregarCategorias() {
+    public void carregarCategorias() throws SQLException {
+        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+        int user_id = ua.findSessaoId();
+    
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        List<Categoria> categorias = categoriaDAO.findAll(1);
-
+        List<Categoria> categorias = categoriaDAO.findAllbyId(user_id);
+    
         categoriaComboBox.getItems().clear();
-
+    
+        categoriaComboBox.getItems().add("Personalizar");
+    
         for (Categoria categoria : categorias) {
             categoriaComboBox.getItems().add(categoria.getNome());
         }
+    
+        categoriaComboBox.setOnAction(event -> {
+            String selectedCategory = categoriaComboBox.getSelectionModel().getSelectedItem();
+            if (selectedCategory.equals("Personalizar")) {
+                try {
+                    propriedades.ScreenGuider("tela-personalizar-categoria.fxml","Personizar Categoria");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+    
 
     @FXML
     public void AdicionarDespesa() {
@@ -84,13 +107,6 @@ public class DespesaController {
 
     @FXML
     public void VoltarMenu() throws IOException {
-        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-menu2.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Menu");
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+       propriedades.ScreenGuider("tela-menu2.fxml", "Menu");
     }
 }

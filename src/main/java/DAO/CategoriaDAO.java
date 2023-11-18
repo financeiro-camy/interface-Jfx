@@ -132,10 +132,34 @@ public class CategoriaDAO {
         }
     }
     
+    public List<Categoria> findAllbyId(int idUsuario) {
+        String sql = "SELECT * FROM Categoria WHERE id_usuario = ?;";
+        List<Categoria> categorias = new ArrayList<>();
+        
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idUsuario);
+        
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    categorias.add(resultSetToCategoria(rs));
+                }
+            } 
+        
+            return categorias;
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
 
     private Categoria resultSetToCategoria(ResultSet rs) throws SQLException {
         return new Categoria(
-           // rs.getInt("id"),
+            rs.getInt("id"),
             rs.getInt("id_usuario"),
             rs.getString("nome")
         );

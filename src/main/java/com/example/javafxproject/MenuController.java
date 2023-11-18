@@ -34,7 +34,7 @@ public class MenuController {
     }
 
     public void configurarMensagemBemVindo(String nomeUsuario) throws IOException {
-        mensagemBemVindo.setText("Seja bem-vindo, " + nomeUsuario + "!");
+        mensagemBemVindo.setText("Olá! " + nomeUsuario + "!");
         if (primeiraConta == false) {
             propriedades.exibirAlerta("Cadastre sua Primeira Conta","Cadastre sua primeira conta, por favor");
             propriedades.ScreenGuider("tela-contasdinheiro2.fxml", "Cadastrar Conta");

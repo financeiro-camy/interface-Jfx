@@ -53,7 +53,7 @@ package com.example.javafxproject;
             System.out.println("Preço da despesa: " + revenueValue);
             System.out.println("Numero de Parcelas:"+ revenueParcelas);
             System.out.println("Pago: " + isPaid);
-    
+
         }
     
         public void VoltarMenu() throws IOException{

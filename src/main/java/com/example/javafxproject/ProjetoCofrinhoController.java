@@ -27,7 +27,7 @@ public class ProjetoCofrinhoController {
     private DatePicker prazo;
 
     @FXML
-    private TextField metaQuantiaField; // Use TextField para a entrada de meta quantia
+    private TextField metaQuantiaField; 
 
 	@FXML
     private CheckBox ckbAtivo;

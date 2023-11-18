@@ -1,6 +1,10 @@
 package com.example.javafxproject;
 
-import javafx.event.ActionEvent;
+import java.sql.SQLException;
+
+import DAO.Periodicidade;
+import DAO.PeriodicidadeDAO;
+import DAO.UsuarioAtributoDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -8,9 +12,23 @@ public class PeriodicidadeController {
     @FXML
     private TextField periodoPersonalizado;
 
-    /* Carlos, eu vou deixar vc arrumar esse botão do seu jeito */
+    
     @FXML
-    public void personalizado(ActionEvent event) {
+    public void periodoPersonalizado() throws SQLException {
+        
+        String nomePeriodo = periodoPersonalizado.getText();
+
         System.out.println("Sua periodicidade foi inserida!");
+        System.out.println(nomePeriodo);
+
+        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+        int idlogado = ua.findSessaoId();
+
+        Periodicidade periodicidade = new Periodicidade(idlogado,nomePeriodo);
+        PeriodicidadeDAO periodicidadeDAO = new PeriodicidadeDAO();
+
+        periodicidadeDAO.create(periodicidade);
+        
+
     }
 }

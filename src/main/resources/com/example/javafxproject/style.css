@@ -1,14 +1,33 @@
+@font-face{
+    font-family: 'Righteous-Regular';
+    src: url('Righteous-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Montserrat-Black';
+    src: url('Montserrat-Black.ttf');
+}
+
+@font-face{
+    font-family: "Montserrat-Bold";
+    src: url('Montserrat-Bold.ttf');
+}
+
+@font-face{
+    font-family: "Montserrat-ExtraBold";
+    src: url('Montserrat-ExtraBold.ttf');
+}
+
+
 VBox{
     -fx-padding: 30px;
 }
 
-Label{
-    -fx-font-size:14px;
-}
+/*Label{
+    -fx-font-family: 'Montserrat-Black';
+}*/
 
-
-
-.titulo{
+/*.titulo{
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-}
+}*/

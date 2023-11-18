@@ -57,11 +57,9 @@ public class CadastroController {
         propriedades.ScreenGuider("tela-login2.fxml","Fazer login");
     }
 
-    public void OnActionLogin() throws IOException{
-
+    public void onActionLogin() throws IOException {
         propriedades.ScreenGuider("tela-login2.fxml","Login");
     }
-
 
     public void setoresPadroes(int id_usuario) throws SQLException {
         System.out.println("ID do Usuário: " + id_usuario);

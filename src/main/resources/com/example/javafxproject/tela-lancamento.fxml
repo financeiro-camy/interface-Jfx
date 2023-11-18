@@ -25,8 +25,3 @@
     <Button text="Cancelar" onAction="#cancelar" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
 </GridPane>
-
-
-
-<!-- INSERIR CÓDIGO URGENTEMENTE
-DEADLINE: NOV. 12-->

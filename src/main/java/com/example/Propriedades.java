@@ -5,6 +5,7 @@ import com.example.javafxproject.MainController;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,4 +21,13 @@ public class Propriedades{
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
   }
+
+  public void exibirAlerta(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
+
 }

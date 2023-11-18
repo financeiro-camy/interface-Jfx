@@ -9,7 +9,7 @@ public class UsuarioAtributoDAO {
 
     private static final int ID_SESSAO_FIXO = 1;
 
-    public void adicionarAtributo(int idUsuario, String nomeAtributo, String valorAtributo) throws SQLException {
+    public void adicionarAtributo(int idUsuario, String nomeAtributo, int idlogado) throws SQLException {
         String sql = "INSERT INTO UsuarioAtributo (id, id_usuario, nome_atributo, valor_atributo) VALUES (?, ?, ?, ?)";
         try (
             Connection connection = Conexao.getConnection();
@@ -18,7 +18,7 @@ public class UsuarioAtributoDAO {
             statement.setInt(1, ID_SESSAO_FIXO);
             statement.setInt(2, idUsuario);
             statement.setString(3, nomeAtributo);
-            statement.setString(4, valorAtributo);
+            statement.setInt(4, idlogado);
             statement.executeUpdate();
         }
     }

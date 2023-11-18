@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import DAO.Usuario;
+import DAO.UsuarioAtributoDAO;
 import DAO.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -29,6 +30,10 @@ public class LoginUsuarioController {
         } else {
             int idlogado = fazerLogin(email, senha);
             if (idlogado != -1) {
+
+                UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
+                uaDAO.adicionarAtributo(idlogado, "id_usuario",idlogado);
+                
                 exibirAlerta("Login Bem Sucedido", "Login foi relizado com sucesso!");
                 AbrirMenu();
             } else {

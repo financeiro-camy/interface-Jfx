@@ -7,8 +7,10 @@ import java.time.format.DateTimeFormatter;
 
 import DAO.ContasDinheiro;
 import DAO.ContasDinheiroDAO;
+import DAO.UsuarioAtributoDAO;
 
 import java.sql.SQLException;
+import com.example.Propriedades;
 
 
 public class ContasDinheiroController {
@@ -24,6 +26,8 @@ public class ContasDinheiroController {
 
     private ContasDinheiroDAO contasDinheiroDAO = new ContasDinheiroDAO();
 
+    Propriedades propriedades = new Propriedades();
+
     @FXML
     public void criarConta() {
         String nome = txfContaNome.getText();
@@ -31,12 +35,12 @@ public class ContasDinheiroController {
         LocalDate dataSelecionada = dataSaldo.getValue();
         
         if (nome.isEmpty()) {
-            exibirAlerta("Campo Vazio", "Nome da conta é obrigatório");
+            propriedades.exibirAlerta("Campo Vazio", "Nome da conta é obrigatório");
             return;
         }
 
         if (dataSelecionada == null) {
-            exibirAlerta("Data Vazia", "Selecione a data da conta");
+            propriedades.exibirAlerta("Data Vazia", "Selecione a data da conta");
             return;
         }
 
@@ -45,25 +49,23 @@ public class ContasDinheiroController {
 
         try {
             
-            ContasDinheiro conta = new ContasDinheiro(1, nome, valorSaldoInicial, dataSelecionada);
+            UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+            int idlogado = ua.findSessaoId();
+            System.out.println(idlogado);    
+
+            ContasDinheiro conta = new ContasDinheiro(idlogado, nome, valorSaldoInicial, dataSelecionada);
             contasDinheiroDAO.create(conta);
             
-            exibirAlerta("Sucesso", "Conta criada com sucesso!");
+            propriedades.exibirAlerta("Sucesso", "Conta criada com sucesso!");
 
             txfContaNome.clear();
             txfSaldoInicial.clear();
             dataSaldo.setValue(null);
 
         } catch (SQLException e) {
-            exibirAlerta("Erro", "Erro ao criar conta: " + e.getMessage());
+            propriedades.exibirAlerta("Erro", "Erro ao criar conta: " + e.getMessage());
         }
     }
 
-    private void exibirAlerta(String titulo, String mensagem) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
-    }
+    
 }

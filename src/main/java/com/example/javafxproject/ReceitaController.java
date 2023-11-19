@@ -29,6 +29,9 @@ package com.example.javafxproject;
     
         @FXML 
         private TextField nParcelas;
+
+        @FXML
+        private ComboBox<String> receitaCategoria;
     
         @FXML
         public void AdicionarReceita() {
@@ -66,8 +69,8 @@ package com.example.javafxproject;
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
         }
-        }
-       
+    }
+//AQUI FALTA IMPLEMENTAR ALGUMAS CONDIÇÕES!!
     
     
 

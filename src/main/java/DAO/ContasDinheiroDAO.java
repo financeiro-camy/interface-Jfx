@@ -87,29 +87,31 @@ public class ContasDinheiroDAO {
         delete(conta.getNome());
     }
 
-    public ContasDinheiro findByNome(String nome) {
-        String sql = "SELECT * FROM ContasDinheiro WHERE nome = ?;";
+    public int buscarIdConta(String nomeConta, int id_usuario) {
+        String sql = "SELECT id FROM ContasDinheiro WHERE nome = ? AND id_usuario = ?;";
+        int id = -1; 
 
         try (
             Connection connection = Conexao.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
-            statement.setString(1, nome);
+            statement.setString(1, nomeConta);
+            statement.setInt(2, id_usuario);
 
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
-                return resultSetToContasDinheiro(rs);
+                id = rs.getInt("id");
             }
 
             rs.close();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
 
-        return null;
+        return id;
     }
+
 
     public List<ContasDinheiro> findAll() {
         String sql = "SELECT * FROM ContasDinheiro;";
@@ -130,6 +132,30 @@ public class ContasDinheiroDAO {
             return null;
         }
     }
+
+    public List<ContasDinheiro> findContasByUsuario(int idUsuario) {
+        String sql = "SELECT * FROM ContasDinheiro WHERE id_usuario = ?;";
+        List<ContasDinheiro> contasUsuario = new ArrayList<>();
+    
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idUsuario);
+    
+            ResultSet rs = statement.executeQuery();
+    
+            while (rs.next()) {
+                contasUsuario.add(resultSetToContasDinheiro(rs));
+            }
+    
+            return contasUsuario;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
 
     public ContasDinheiro findById(Integer id) {
         String sql = "SELECT * FROM ContasDinheiro WHERE id = ?;";
@@ -155,6 +181,7 @@ public class ContasDinheiroDAO {
 
         return null;
     }
+
 
     private ContasDinheiro resultSetToContasDinheiro(ResultSet rs) throws SQLException {
         return new ContasDinheiro(

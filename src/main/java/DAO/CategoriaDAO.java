@@ -156,6 +156,30 @@ public class CategoriaDAO {
         }
     }
     
+    public int buscarIdCategoria(String nomeCategoria, int userId) {
+        String sql = "SELECT id FROM Categoria WHERE nome = ? AND id_usuario = ?;";
+        int id = -1;
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setString(1, nomeCategoria);
+            statement.setInt(2, userId);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
 
     private Categoria resultSetToCategoria(ResultSet rs) throws SQLException {
         return new Categoria(

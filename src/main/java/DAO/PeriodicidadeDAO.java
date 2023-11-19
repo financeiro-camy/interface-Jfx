@@ -113,6 +113,55 @@ package DAO;
             }
         }
     
+        public List<Periodicidade> findDespesasByUsuario(int idUsuario) {
+            String sql = "SELECT * FROM Periodicidade WHERE id_usuario = ?;";
+            List<Periodicidade> despesasUsuario = new ArrayList<>();
+        
+            try (
+                Connection connection = Conexao.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql);
+            ) {
+                statement.setInt(1, idUsuario);
+        
+                ResultSet rs = statement.executeQuery();
+        
+                while (rs.next()) {
+                    despesasUsuario.add(resultSetToPeriodicidade(rs));
+                }
+        
+                return despesasUsuario;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        public int buscarIdPeriodicidade(String nomePeriodicidade, int id_usuario) {
+            String sql = "SELECT id FROM Periodicidade WHERE nome = ? AND id_usuario = ?;";
+            int id = -1;
+    
+            try (
+                Connection connection = Conexao.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql);
+            ) {
+                statement.setString(1, nomePeriodicidade);
+                statement.setInt(2, id_usuario);
+    
+                ResultSet rs = statement.executeQuery();
+    
+                if (rs.next()) {
+                    id = rs.getInt("id");
+                }
+    
+                rs.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    
+            return id;
+        }
+    
+        
         private Periodicidade resultSetToPeriodicidade(ResultSet rs) throws SQLException {
             return new Periodicidade(
                 rs.getInt("id"),

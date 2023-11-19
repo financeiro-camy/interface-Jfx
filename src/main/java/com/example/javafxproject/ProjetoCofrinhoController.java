@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import com.example.Propriedades;
 

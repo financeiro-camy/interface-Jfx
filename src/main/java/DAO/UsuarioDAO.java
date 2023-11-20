@@ -177,6 +177,24 @@ public class UsuarioDAO {
         return false;
     }
 
+    public boolean verificarEmailExistente(String email) throws SQLException {
+        String sql = "SELECT COUNT(*) AS count FROM Usuario WHERE email = ?";
+    
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+    
+            if (resultSet.next()) {
+                int count = resultSet.getInt("count");
+                return count > 0;
+            }
+        }
+    
+        return false;
+    }
     
     private Usuario resultSetToUsuario(ResultSet rs) throws SQLException {
         return new Usuario(

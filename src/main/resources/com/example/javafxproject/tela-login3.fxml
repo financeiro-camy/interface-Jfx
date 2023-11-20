@@ -42,7 +42,7 @@
             <Label layoutX="61.0" layoutY="227.0" text="Não é cadastrado? Clique no botão abaixo " textFill="WHITE" />
             <Label layoutX="61.0" layoutY="248.0" text="para se cadastrar e começar a organizar " textFill="WHITE" />
             <Label layoutX="61.0" layoutY="269.0" text="sua vida financeira rápido e fácil." textFill="WHITE" />
-            <Button layoutX="64.0" layoutY="315.0" mnemonicParsing="false" onAction="#OnActionCadastar" style="-fx-background-color: cf9e9d;" text="Cadastrar" textFill="WHITE">
+            <Button layoutX="64.0" layoutY="315.0" mnemonicParsing="false" onAction="#OnActionCadastrar" style="-fx-background-color: cf9e9d;" text="Cadastrar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

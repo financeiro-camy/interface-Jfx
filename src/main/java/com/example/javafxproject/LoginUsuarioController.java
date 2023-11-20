@@ -42,9 +42,9 @@ public class LoginUsuarioController {
         }
     }
 
-    public void OnActionCadastar() throws IOException {
+    public void OnActionCadastrar() throws IOException {
         Propriedades propriedades = new Propriedades();
-        propriedades.ScreenGuider("tela-cadastro2.fxml", "Cadastro");
+        propriedades.ScreenGuider("tela-cadastro3.fxml", "Cadastro");
     }
 
     private void exibirAlerta(String titulo, String mensagem) {
@@ -57,7 +57,7 @@ public class LoginUsuarioController {
 
     public void AbrirMenu() throws IOException {
         Propriedades propriedades = new Propriedades();
-        propriedades.ScreenGuider("tela-menu2.fxml", "Menu");
+        propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
     }
 
     public static int fazerLogin(String email, String senha) throws SQLException {

@@ -65,7 +65,5 @@ public class ContasDinheiroController {
         } catch (SQLException e) {
             propriedades.exibirAlerta("Erro", "Erro ao criar conta: " + e.getMessage());
         }
-    }
-
-    
+    }  
 }

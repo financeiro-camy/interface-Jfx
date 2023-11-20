@@ -29,34 +29,43 @@ public class CadastroController {
        
     Propriedades propriedades = new Propriedades();
 
-    @FXML
-    public void Cadastrar() throws IOException, SQLException  {
-    
+    public void Cadastrar() throws IOException, SQLException {
         String nome = txfNome.getText();
         String email = txfEmail.getText();
         String senha = txfSenha.getText();
         String senhaTeste = txfSenhaTeste.getText();
-
-        String hashedPassword = BCrypt.hashpw(senha, BCrypt.gensalt());
-
-        Usuario user = new Usuario(nome,email, hashedPassword,true);
-        UsuarioDAO userDAO = new UsuarioDAO();
-        userDAO.create(user);
-
-        int id_usuario = user.getId();
-        propriedades.setoresPadroes(id_usuario);
-
-        propriedades.exibirAlerta("Agora faça o seu primeiro login!", "Nome, email e senha cadastrados com sucesso! Agora inicie a sua sessão na tela login!");
-
-        CriarPrimeiraConta();
+    
+        if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || senhaTeste.isEmpty()) {
+            propriedades.exibirAlerta("Campos Vazios", "Preencha todos os campos");
+        } else if (!senha.equals(senhaTeste)) {
+            propriedades.exibirAlerta("Senhas não coincidem", "As senhas não coincidem");
+        } else {
+            UsuarioDAO userDAO = new UsuarioDAO();
+            
+            boolean emailExistente = userDAO.verificarEmailExistente(email);
+            if (emailExistente) {
+                propriedades.exibirAlerta("Email já cadastrado", "O email já está cadastrado");
+            } else {
+                String hashedPassword = BCrypt.hashpw(senha, BCrypt.gensalt());
+                Usuario user = new Usuario(nome, email, hashedPassword, true);
+                userDAO.create(user);
+    
+                int id_usuario = user.getId();
+                propriedades.setoresPadroes(id_usuario);
+    
+                propriedades.exibirAlerta("Cadastro realizado", "Cadastro realizado com sucesso! Agora inicie sua sessão com o login.");
+                CriarPrimeiraConta();
+            }
+        }
     }
+    
 
-    public void CriarPrimeiraConta() throws IOException{
-        propriedades.ScreenGuider("tela-login2.fxml","Fazer login");
+    public void CriarPrimeiraConta() throws IOException {
+        propriedades.ScreenGuider("tela-login3.fxml", "Fazer login");
     }
 
     public void onActionLogin() throws IOException {
-        propriedades.ScreenGuider("tela-login2.fxml","Login");
+        propriedades.ScreenGuider("tela-login3.fxml","Login");
     }
     
 }

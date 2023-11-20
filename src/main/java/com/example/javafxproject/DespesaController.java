@@ -150,7 +150,7 @@ public class DespesaController {
             String selectedAccount = contaComboBox.getSelectionModel().getSelectedItem();
             if (selectedAccount.equals("Adicionar")) {
                 try {
-                    propriedades.ScreenGuider("tela-contasdinheiro2.fxml", "Adicionar Conta");
+                    propriedades.ScreenGuider("tela-contasdinheiro3.fxml", "Adicionar Conta");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -191,6 +191,9 @@ public class DespesaController {
             LancamentoDAO lancamentoDAO = new LancamentoDAO();
             lancamentoDAO.create(lancamento);
 
+            propriedades.exibirAlerta("Despesa cadastrada com sucesso!", "Sua despesa foi cadastrada com sucesso!");
+            limparAtributosDespesa();
+
         } else {
             System.out.println("Deu erro, amigão");
         }
@@ -198,8 +201,21 @@ public class DespesaController {
 
     @FXML
     public void VoltarMenu() throws IOException {
-        propriedades.ScreenGuider("tela-menu2.fxml", "Menu");
+        propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
     }
-    // Seus outros métodos...
+
+    public void limparAtributosDespesa() {
+        nomeDespesa.clear();
+        valorDespesa.clear();
+        dataPagamento.getEditor().clear();
+        dataVencimento.getEditor().clear();
+        despesaCKB.setSelected(false); 
+        descricaoDespesa.clear();
+        numeroParcelas.clear();
+        categoriaComboBox.getSelectionModel().clearSelection(); 
+        periodicidadeComboBox.getSelectionModel().clearSelection();
+        contaComboBox.getSelectionModel().clearSelection();
+    }
+    
 
 }

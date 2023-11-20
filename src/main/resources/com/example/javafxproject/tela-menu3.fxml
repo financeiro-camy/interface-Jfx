@@ -10,18 +10,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<!-- Carlos, os erros que estão dando são conexão ao banco de dados e no MenuController
-Existe um java.lang.reflect.InvocationTargetException que 
-indica um problema dentro do código do controlador (MenuController.java).
- Isso geralmente ocorre quando há um erro durante a inicialização ou execução do controlador,
-  o que pode estar relacionado à tentativa de conexão com o banco de dados no início da execução 
-  do controlador (MenuController.java:97).
 
-Verifique o código na linha 97 do MenuController.java e revise se há alguma operação que pode estar
-causando um erro durante a inicialização do controlador.
--->
-
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.MenuController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.MenuController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #81a0a0;" VBox.vgrow="ALWAYS">
          <children>
@@ -60,12 +50,12 @@ causando um erro durante a inicialização do controlador.
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="307.0" layoutY="227.0" mnemonicParsing="false" onAction="#adicionarLancamento" style="-fx-background-color: #c4e49b; -fx-background-radius: 15px;" text="Receita" textFill="WHITE">
+            <Button layoutX="307.0" layoutY="227.0" mnemonicParsing="false" onAction="#adicionarReceita" style="-fx-background-color: #c4e49b; -fx-background-radius: 15px;" text="Receita" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Label layoutX="307.0" layoutY="194.0" prefHeight="27.0" prefWidth="149.0" text="Lancamento" textFill="WHITE">
+            <Label layoutX="272.0" layoutY="193.0" prefHeight="27.0" prefWidth="149.0" text="Adicionar lançamento" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -98,19 +88,14 @@ causando um erro durante a inicialização do controlador.
                         <Image url="@configuracaofoto.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="39.0" layoutY="337.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Privacidade" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="10.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="38.0" layoutY="292.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" style="-fx-background-color: #D2E2FF; -fx-background-radius: 15px;" text="Logout">
+                  <Button layoutX="38.0" layoutY="343.0" mnemonicParsing="false" onAction="#realizarLogout" prefHeight="31.0" prefWidth="74.0" style="-fx-background-color: #D2E2FF; -fx-background-radius: 15px;" text="Logout">
                      <font>
                         <Font name="System Bold" size="10.0" />
                      </font>
                   </Button>
                </children>
             </Pane>
-            <Button layoutX="307.0" layoutY="273.0" mnemonicParsing="false" onAction="#adicionarLancamento" style="-fx-background-color: #ffafaf; -fx-background-radius: 15px;" text="Despesa" textFill="WHITE">
+            <Button layoutX="307.0" layoutY="273.0" mnemonicParsing="false" onAction="#adicionarDespesa" style="-fx-background-color: #ffafaf; -fx-background-radius: 15px;" text="Despesa" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

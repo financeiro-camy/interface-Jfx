@@ -14,7 +14,7 @@ public class MainController {
 
 @FXML
 protected void onAbrirProjetoCofrinho() throws IOException {
-FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-login2.fxml"));
+FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-login3.fxml"));
 Scene scene = new Scene(loader.load());
 Stage stage = new Stage();
 stage.setTitle("Projeto Cofrinho");
@@ -26,7 +26,7 @@ stage.showAndWait();
 
 @FXML
 protected void onContaDinheiro() throws IOException {
-FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-contasdinheiro.fxml"));
+FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-contasdinheiro3.fxml"));
 Scene scene = new Scene(loader.load());
 Stage stage = new Stage();
 stage.setTitle("Contas Dinheiro");

@@ -1,16 +1,32 @@
 package com.example.javafxproject;
 
-    import javafx.fxml.FXML;
-    import javafx.fxml.FXMLLoader;
-    import javafx.scene.Scene;
-    import javafx.scene.control.*;
-    import javafx.stage.Modality;
-    import javafx.stage.Stage;
-    import java.io.IOException;
-    import java.time.LocalDate;
-    import java.time.format.DateTimeFormatter;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+
+import com.example.Propriedades;
+import DAO.Categoria;
+import DAO.CategoriaDAO;
+import DAO.ContasDinheiro;
+import DAO.ContasDinheiroDAO;
+import DAO.Lancamento;
+import DAO.LancamentoDAO;
+import DAO.Periodicidade;
+import DAO.PeriodicidadeDAO;
+import DAO.UsuarioAtributoDAO;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
     
     public class ReceitaController {
+
+    private int selectedCategoryId = -1;
+    private int selectedPeriodicityId = -1;
+    private int selectedAccountId = -1;
     
         @FXML
         private TextField nomeReceita;
@@ -31,46 +47,164 @@ package com.example.javafxproject;
         private TextField nParcelas;
 
         @FXML
-        private ComboBox<String> receitaCategoria;
+        private ComboBox<String> categoriaComboBox;
+
+        @FXML 
+        private ComboBox<String> contaComboBox;
+
+        @FXML
+        private ComboBox<String> periodicidadeComboBox;
+
+        private Propriedades propriedades = new Propriedades();
+
+    @FXML
+    public void initialize() throws SQLException {
+        carregarCategorias();
+        carregarPeriodicidades();
+        carregarContas();
+    }
+
+    public void carregarCategorias() throws SQLException {
+        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+        int user_id = ua.findSessaoId();
+
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        List<Categoria> categorias = categoriaDAO.findAllbyId(user_id);
+
+        categoriaComboBox.getItems().clear();
+
+        categoriaComboBox.getItems().add("Personalizar");
+
+        for (Categoria categoria : categorias) {
+            categoriaComboBox.getItems().add(categoria.getNome());
+        }
+
+        categoriaComboBox.setOnAction(event -> {
+            String selectedCategory = categoriaComboBox.getSelectionModel().getSelectedItem();
+            if (selectedCategory.equals("Personalizar")) {
+                try {
+                    propriedades.ScreenGuider("tela-personalizar-categoria.fxml", "Personalizar Categoria");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                int categoryId = categoriaDAO.buscarIdCategoria(selectedCategory, user_id);
+                System.out.println("ID da categoria selecionada: " + categoryId);
+
+                selectedCategoryId = categoryId;
+            }
+        });
+    }
+
+    public void carregarPeriodicidades() throws SQLException {
+        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+        int user_id = ua.findSessaoId();
+
+        PeriodicidadeDAO periodicidadeDAO = new PeriodicidadeDAO();
+        List<Periodicidade> periodicidades = periodicidadeDAO.findDespesasByUsuario(user_id);
+
+        periodicidadeComboBox.getItems().clear();
+
+        periodicidadeComboBox.getItems().add("Personalizar");
+
+        for (Periodicidade periodicidade : periodicidades) {
+            periodicidadeComboBox.getItems().add(periodicidade.getNome());
+        }
+
+        periodicidadeComboBox.setOnAction(event -> {
+            String selectedPeriod = periodicidadeComboBox.getSelectionModel().getSelectedItem();
+            if (selectedPeriod.equals("Personalizar")) {
+                try {
+                    propriedades.ScreenGuider("tela-periodicidade2.fxml", "Personalizar Periodicidade");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                PeriodicidadeDAO outraInstanciaPeriodicidadeDAO = new PeriodicidadeDAO();
+                int periodicityId = outraInstanciaPeriodicidadeDAO.buscarIdPeriodicidade(selectedPeriod, user_id);
+                System.out.println("ID da periodicidade selecionada: " + periodicityId);
+
+                selectedPeriodicityId = periodicityId;
+            }
+        });
+    }
+
+    public void carregarContas() throws SQLException {
+        ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
+        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+        int user_id = ua.findSessaoId();
+
+        List<ContasDinheiro> contas = contasDAO.findContasByUsuario(user_id);
+
+        contaComboBox.getItems().clear();
+
+        contaComboBox.getItems().add("Adicionar");
+
+        for (ContasDinheiro conta : contas) {
+            contaComboBox.getItems().add(conta.getNome());
+        }
+
+        contaComboBox.setOnAction(event -> {
+            String selectedAccount = contaComboBox.getSelectionModel().getSelectedItem();
+            if (selectedAccount.equals("Adicionar")) {
+                try {
+                    propriedades.ScreenGuider("tela-contasdinheiro3.fxml", "Adicionar Conta");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                ContasDinheiroDAO outraInstanciaContasDAO = new ContasDinheiroDAO();
+                int accountId = outraInstanciaContasDAO.buscarIdConta(selectedAccount, user_id);
+                System.out.println("ID da conta selecionada: " + accountId);
+
+                selectedAccountId = accountId;
+            }
+        });
+    }
+        
     
         @FXML
-        public void AdicionarReceita() {
-        
+        public void AdicionarReceita() throws SQLException {
+        if (selectedCategoryId != -1 && selectedPeriodicityId != -1 && selectedAccountId != -1) {
+            
             String revenueName = nomeReceita.getText();
             String revenueDescription = descricaoReceita.getText();
-    
             LocalDate revenueDate = dataRecebido.getValue();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String dataFormatada = revenueDate.format(formatter);
-    
-    
             double revenueValue = Double.parseDouble(valorReceita.getText());
             Boolean isPaid = receitaCKB.isSelected();
-    
-            double revenueParcelas = Double.parseDouble(nParcelas.getText());
-    
-    
-            System.out.println("Nome da despesa: " + revenueName);
-            System.out.println("Descrição da despesa: " + revenueDescription);
-            System.out.println("Data de vencimento: " + dataFormatada);
-            System.out.println("Preço da despesa: " + revenueValue);
-            System.out.println("Numero de Parcelas:"+ revenueParcelas);
-            System.out.println("Pago: " + isPaid);
+            int revenueParcelas = Integer.parseInt(nParcelas.getText());
 
+            Lancamento lancamento = new Lancamento(selectedCategoryId,selectedAccountId,selectedPeriodicityId,revenueName,revenueDescription,revenueValue,"receita",revenueParcelas,revenueDate,isPaid,revenueDate);
+            LancamentoDAO lancamentoDAO = new LancamentoDAO();
+            lancamentoDAO.create(lancamento);
+
+            propriedades.exibirAlerta("Receita cadastrada com sucesso! ", "Sua receita foi cadastrada com sucesso!");
+
+            limparCampos();
+
+        } else {
+            System.out.println("Deu erro, amigão");
+        }
         }
     
-        public void VoltarMenu() throws IOException{
-        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-menu2.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setTitle("Menu");
-                stage.setScene(scene);
-                stage.sizeToScene();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.showAndWait();
+        @FXML
+        public void voltarMenu() throws IOException{
+        propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
         }
+
+        public void limparCampos() {
+            nomeReceita.clear();
+            valorReceita.clear();
+            dataRecebido.getEditor().clear();
+            receitaCKB.setSelected(false);
+            descricaoReceita.clear();
+            nParcelas.clear();
+            categoriaComboBox.getSelectionModel().clearSelection();
+            contaComboBox.getSelectionModel().clearSelection();
+            periodicidadeComboBox.getSelectionModel().clearSelection();
+        }
+        
     }
-//AQUI FALTA IMPLEMENTAR ALGUMAS CONDIÇÕES!!
     
     
 

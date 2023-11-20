@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 
 import DAO.ContasDinheiro;
 import DAO.ContasDinheiroDAO;
+import DAO.HistoricoSaldos;
+import DAO.HistoricoSaldosDAO;
 import DAO.UsuarioAtributoDAO;
 
 import java.sql.SQLException;
@@ -57,6 +59,13 @@ public class ContasDinheiroController {
             contasDinheiroDAO.create(conta);
             
             propriedades.exibirAlerta("Sucesso", "Conta criada com sucesso!");
+
+            int id_conta = conta.getId();
+            HistoricoSaldos historicoSaldos = new HistoricoSaldos(id_conta,dataSelecionada,valorSaldoInicial);
+            HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
+
+            historicoSaldosDAO.create(historicoSaldos);
+            
 
             txfContaNome.clear();
             txfSaldoInicial.clear();

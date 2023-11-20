@@ -83,7 +83,7 @@ import javafx.scene.control.TextField;
             String selectedCategory = categoriaComboBox.getSelectionModel().getSelectedItem();
             if (selectedCategory.equals("Personalizar")) {
                 try {
-                    propriedades.ScreenGuider("tela-personalizar-categoria.fxml", "Personalizar Categoria");
+                    propriedades.ScreenGuider("tela-personalizar-categoria1.fxml", "Personalizar Categoria");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

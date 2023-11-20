@@ -1,6 +1,9 @@
 package com.example.javafxproject;
 
+import java.io.IOException;
 import java.sql.SQLException;
+
+import com.example.Propriedades;
 
 import DAO.Categoria;
 import DAO.CategoriaDAO;
@@ -12,7 +15,7 @@ public class PersonalizaCategoriaController {
     @FXML
     private TextField categoriaPersonalizada;
 
-
+Propriedades propriedades = new Propriedades();
     @FXML
     public void criarCategoria() throws SQLException {
 
@@ -26,5 +29,10 @@ public class PersonalizaCategoriaController {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
 
         categoriaDAO.create(categoria);
+    }
+
+    @FXML
+    public void voltarMenu() throws IOException{
+        propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
     }
 }

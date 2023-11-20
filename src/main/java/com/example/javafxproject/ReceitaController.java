@@ -10,6 +10,7 @@ import DAO.Categoria;
 import DAO.CategoriaDAO;
 import DAO.ContasDinheiro;
 import DAO.ContasDinheiroDAO;
+import DAO.HistoricoSaldosDAO;
 import DAO.Lancamento;
 import DAO.LancamentoDAO;
 import DAO.Periodicidade;
@@ -177,6 +178,9 @@ import javafx.scene.control.TextField;
             Lancamento lancamento = new Lancamento(selectedCategoryId,selectedAccountId,selectedPeriodicityId,revenueName,revenueDescription,revenueValue,"receita",revenueParcelas,revenueDate,isPaid,revenueDate);
             LancamentoDAO lancamentoDAO = new LancamentoDAO();
             lancamentoDAO.create(lancamento);
+
+            HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
+            historicoSaldosDAO.atualizarSaldo(revenueValue, "receita", selectedAccountId);
 
             propriedades.exibirAlerta("Receita cadastrada com sucesso! ", "Sua receita foi cadastrada com sucesso!");
 

@@ -12,6 +12,7 @@ import com.example.Propriedades;
 
 import DAO.ContasDinheiro;
 import DAO.ContasDinheiroDAO;
+import DAO.HistoricoSaldosDAO;
 import DAO.ProjetoCofrinho;
 import DAO.ProjetoCofrinhoDAO;
 import DAO.RelatorioPC;
@@ -120,7 +121,7 @@ public class RelatorioPCController {
     LocalDate dataTransacao = dataInsercao.getValue();
   
         
-    System.out.println("Saldo Inicial: " + valorInsercao);
+    System.out.println("Valor a ser inserido: " + valorInsercao);
     System.out.println("Data de inserção: " + dataInsercao);
     System.out.println("Conta: " + selectedAccountId);
     System.out.println("Projeto selecionado:"+selectedProjectId);
@@ -129,8 +130,12 @@ public class RelatorioPCController {
     RelatorioPCDAO relatorioPCDAO = new RelatorioPCDAO();
     relatorioPCDAO.create(relatorio);
 
+    System.out.println(selectedAccountId);
+    HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
+    historicoSaldosDAO.atualizarSaldo(valorInsercao, "projeto", selectedAccountId);
+
     propriedades.exibirAlerta("Inserção realiza do sucesso!", "Sua inserçaõ foi relalizada com sucesso.");
-    limparCampos();
+    //limparCampos();
 
   } else {
     System.out.println("Deu erro, amigão");

@@ -10,6 +10,7 @@ import DAO.Categoria;
 import DAO.CategoriaDAO;
 import DAO.ContasDinheiro;
 import DAO.ContasDinheiroDAO;
+import DAO.HistoricoSaldosDAO;
 import DAO.Lancamento;
 import DAO.LancamentoDAO;
 import DAO.Periodicidade;
@@ -176,20 +177,12 @@ public class DespesaController {
             Boolean isPaid = despesaCKB.isSelected();
             int billParcelas = Integer.parseInt(numeroParcelas.getText());
 
-            System.out.println("Nome da despesa: " + billName);
-            System.out.println("Descrição da despesa: " + billDescription);
-            System.out.println("Data de vencimento: " + billDeadline);
-            System.out.println("Data de pagamento: " + billPayment);
-            System.out.println("Preço da despesa: " + billPrice);
-            System.out.println("Numero de Parcelas:" + billParcelas);
-            System.out.println("Pago: " + isPaid);
-            System.out.println("ID da categoria selecionada: " + selectedCategoryId);
-            System.out.println("ID da periodicidade selecionada: " + selectedPeriodicityId);
-            System.out.println("ID da conta selecionada: " + selectedAccountId);
-
             Lancamento lancamento = new Lancamento(selectedCategoryId,selectedAccountId,selectedPeriodicityId,billName,billDescription,billPrice,"despesa",billParcelas,billDeadline,isPaid,billPayment);
             LancamentoDAO lancamentoDAO = new LancamentoDAO();
             lancamentoDAO.create(lancamento);
+
+            HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
+            historicoSaldosDAO.atualizarSaldo(billPrice, "despesa", selectedAccountId);
 
             propriedades.exibirAlerta("Despesa cadastrada com sucesso!", "Sua despesa foi cadastrada com sucesso!");
             limparAtributosDespesa();

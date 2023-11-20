@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -83,6 +84,96 @@ public class HistoricoSaldosDAO {
 
         return null;
     }
+
+    public double buscarValorAtivoPorIdConta(int idConta) {
+        String sql = "SELECT saldo FROM HistoricoSaldos WHERE id_conta = ? AND ativo = true;";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idConta);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble("saldo");
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1; 
+    }
+
+    public int buscarIdAtivoPorIdConta(int idConta) {
+        String sql = "SELECT id FROM HistoricoSaldos WHERE id_conta = ? AND ativo = true;";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idConta);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1; 
+    }
+
+    public void atualizarAtivoParaFalse(int idHistoricoSaldos) {
+        String sql = "UPDATE HistoricoSaldos SET ativo = false WHERE id = ?;";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idHistoricoSaldos);
+
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated == 0) {
+                System.out.println("Nenhuma linha foi atualizada.");
+            } else {
+                System.out.println("O campo ativo foi atualizado para false com sucesso!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void atualizarSaldo(double valor, String tipo, int id_conta) throws SQLException {
+    HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
+
+    double saldo = historicoSaldosDAO.buscarValorAtivoPorIdConta(id_conta);
+    System.out.println(saldo);
+    int id_desatual = historicoSaldosDAO.buscarIdAtivoPorIdConta(id_conta);
+    double saldonovo;
+
+    if ("despesa".equals(tipo) || "projeto".equals(tipo)) {
+        saldonovo = saldo - valor;
+    } else {
+        saldonovo = saldo + valor;
+    }
+
+    historicoSaldosDAO.atualizarAtivoParaFalse(id_desatual);
+
+    LocalDate dataRegistro = LocalDate.now();
+    HistoricoSaldos historicoSaldos = new HistoricoSaldos(id_conta, dataRegistro, saldonovo, true);
+
+    historicoSaldosDAO.create(historicoSaldos);
+}
+
+
 
     public HistoricoSaldos resultSetToHistoricoSaldos(ResultSet rs) throws SQLException {
         return new HistoricoSaldos(

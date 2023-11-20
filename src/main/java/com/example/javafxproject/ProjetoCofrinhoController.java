@@ -48,7 +48,8 @@ public class ProjetoCofrinhoController {
         ProjetoCofrinho projetoCofrinho = new ProjetoCofrinho(idlogado,nome,descricao,dataSelecionada,dataCriacao,valorMeta,projetoAtivo);
         ProjetoCofrinhoDAO projetoCofrinhoDAO = new ProjetoCofrinhoDAO();
         projetoCofrinhoDAO.create(projetoCofrinho);
-            
+        
+        
         propriedades.exibirAlerta("Sucesso", "Projeto criado com sucesso!");
 
         } catch (SQLException e) {

@@ -8,19 +8,22 @@ public class HistoricoSaldos {
     private int idConta;
     private Date dataRegistro;
     private double saldo;
+    private boolean ativo;
 
    
-    public HistoricoSaldos(int id, int idConta, LocalDate dataRegistro, double saldo) {
+    public HistoricoSaldos(int id, int idConta, LocalDate dataRegistro, double saldo, boolean ativo) {
         this.id = id;
         this.idConta = idConta;
         this.dataRegistro = Date.valueOf(dataRegistro);
         this.saldo = saldo;
+        this.ativo = ativo;
     }
 
-    public HistoricoSaldos(int idConta, LocalDate dataRegistro, double saldo) {
+    public HistoricoSaldos(int idConta, LocalDate dataRegistro, double saldo, boolean ativo) {
         this.idConta = idConta;
         this.dataRegistro = Date.valueOf(dataRegistro);
         this.saldo = saldo;
+        this.ativo = ativo;
     }
 
     public int getId() {
@@ -53,6 +56,14 @@ public class HistoricoSaldos {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public boolean getAtivo(){
+        return ativo;
+    }
+
+    public void setAivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }
 

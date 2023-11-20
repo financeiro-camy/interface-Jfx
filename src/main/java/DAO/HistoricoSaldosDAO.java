@@ -12,7 +12,7 @@ import java.sql.Date;
 public class HistoricoSaldosDAO {
 
     public HistoricoSaldos create(HistoricoSaldos historicoSaldos) throws SQLException {
-        String sql = "INSERT INTO HistoricoSaldos (id_conta, data_registro, saldo) VALUES (?, ?, ?);";
+        String sql = "INSERT INTO HistoricoSaldos (id_conta, data_registro, saldo, ativo) VALUES (?, ?, ?, ?);";
 
         try (
             Connection connection = Conexao.getConnection();
@@ -21,6 +21,7 @@ public class HistoricoSaldosDAO {
             statement.setInt(1, historicoSaldos.getIdConta());
             statement.setDate(2, Date.valueOf(historicoSaldos.getDataRegistro()));
             statement.setDouble(3, historicoSaldos.getSaldo());
+            statement.setBoolean(4, historicoSaldos.getAtivo());
 
             int rowsAffected = statement.executeUpdate();
 
@@ -88,7 +89,8 @@ public class HistoricoSaldosDAO {
             rs.getInt("id"),
             rs.getInt("id_conta"),
             rs.getDate("data_registro").toLocalDate(),
-            rs.getDouble("saldo")
+            rs.getDouble("saldo"),
+            rs.getBoolean("ativo")
         );
     }
     

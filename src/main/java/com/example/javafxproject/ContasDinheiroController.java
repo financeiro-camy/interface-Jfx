@@ -61,7 +61,7 @@ public class ContasDinheiroController {
             propriedades.exibirAlerta("Sucesso", "Conta criada com sucesso!");
 
             int id_conta = conta.getId();
-            HistoricoSaldos historicoSaldos = new HistoricoSaldos(id_conta,dataSelecionada,valorSaldoInicial);
+            HistoricoSaldos historicoSaldos = new HistoricoSaldos(id_conta,dataSelecionada,valorSaldoInicial,true);
             HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
 
             historicoSaldosDAO.create(historicoSaldos);

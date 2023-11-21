@@ -13,6 +13,25 @@ Este projeto foi desenvolvido para avaliação nas disciplinas de Linguagem de P
 
 - Para a construção do **programa**, foram utilizadas as linguagens: SQL (Structured Query Language) e Java.
 - Para a construção da **interface, foi utilizada JavaFX, que inclui componentes como a linguagem de marcação** *FXML*. Essa biblioteca permite a integração da interface com o código java, além de promover a integração do código com folhas de estilo CSS.
+
+### Sumário: 
+
+- Tela Apresentação 
+- Tela Login 
+- Tela Cadastro 
+
+#### Formulários:
+
+- Cadastrar Conta Dinheiro
+- Cadastrar Projeto Cofrinho 
+- Realizar uma inserção ao projeto 
+- Cadastrar Despesa 
+- Cadastrar Receita 
+- Personalizar Periodicidade
+
+- Tela Menu 
+- Tela Logout
+
 ## Autores
 
 - [@ca12loss](https://github.com/ca12loss): *Carlos Alberto*

@@ -7,12 +7,12 @@ Este projeto foi desenvolvido para avaliação nas disciplinas de Linguagem de P
 
 ## Apêndice
 
-#### *Projeto JavaFX usando Maven*
+#### **Projeto JavaFX usando Maven**
 
-*A aplicação desktop foi desenvolvida utilizando:*
+**A aplicação desktop foi desenvolvida utilizando:**
 
-- Para a construção do *programa*, foram utilizadas as linguagens: SQL (Structured Query Language) e Java.
-- Para a construção da *interface, foi utilizada JavaFX, que inclui componentes como a linguagem de marcação **FXML*. Essa biblioteca permite a integração da interface com o código java, além de promover a integração do código com folhas de estilo CSS.
+- Para a construção do **programa**, foram utilizadas as linguagens: SQL (Structured Query Language) e Java.
+- Para a construção da **interface, foi utilizada JavaFX, que inclui componentes como a linguagem de marcação** *FXML*. Essa biblioteca permite a integração da interface com o código java, além de promover a integração do código com folhas de estilo CSS.
 ## Autores
 
 - [@ca12loss](https://github.com/ca12loss): *Carlos Alberto*
@@ -24,7 +24,7 @@ Este projeto foi desenvolvido para avaliação nas disciplinas de Linguagem de P
 
 ## Instalação
 
-Instale *financeiro-camy/interface-Jfx* e abra no ambiente Visual Studio Code *(vscode)*
+Instale **financeiro-camy/interface-Jfx** e abra no ambiente Visual Studio Code *(vscode)*
 
 bash
   mkdir folder
@@ -41,7 +41,7 @@ Clone o repositório em sua máquina
 bash
 rm -rf .git
 
-- não esqueça de trocar o endereço da database para que o código seja alocado em sua própria database!
+- **não esqueça de trocar o endereço da database para que o código seja alocado em sua própria database!**
 
 No mesmo terminal que foi configurado o proxy executar o comando:
 bash

@@ -41,6 +41,7 @@ Este projeto foi desenvolvido para avaliação nas disciplinas de Linguagem de P
 - ContasDinheiroDAO: gerencia o armazenamento das informações da tabela ContasDinheiro 
 - ProjetoCofrinhoDAO: gerencia o armazenamento das informações da tabela ProjetoCofrinho
 - RelatorioPCDAO: gerencia o armazenamento das informações da tabela RelatorioPC (utilizada para guardar as inserções de valores no cofrinho)
+- LancamentoDAO: gerencia o armazenamento das informações da tabela Lancamento (utilizada para guardar as inserções de valores na conta)
 
 ## Autores
 

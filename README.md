@@ -41,6 +41,7 @@ Clone o repositório em sua máquina
 bash
 rm -rf .git
 
+- não esqueça de trocar o endereço da database para que o código seja alocado em sua própria database!
 
 No mesmo terminal que foi configurado o proxy executar o comando:
 bash

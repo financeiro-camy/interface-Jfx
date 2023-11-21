@@ -179,8 +179,10 @@ import javafx.scene.control.TextField;
             LancamentoDAO lancamentoDAO = new LancamentoDAO();
             lancamentoDAO.create(lancamento);
 
+            if (lancamento.isPago()==true){
             HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
             historicoSaldosDAO.atualizarSaldo(revenueValue, "receita", selectedAccountId);
+            }
 
             propriedades.exibirAlerta("Receita cadastrada com sucesso! ", "Sua receita foi cadastrada com sucesso!");
 

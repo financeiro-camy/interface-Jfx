@@ -181,8 +181,10 @@ public class DespesaController {
             LancamentoDAO lancamentoDAO = new LancamentoDAO();
             lancamentoDAO.create(lancamento);
 
+            if (lancamento.isPago()==true){
             HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
             historicoSaldosDAO.atualizarSaldo(billPrice, "despesa", selectedAccountId);
+            }
 
             propriedades.exibirAlerta("Despesa cadastrada com sucesso!", "Sua despesa foi cadastrada com sucesso!");
             limparAtributosDespesa();

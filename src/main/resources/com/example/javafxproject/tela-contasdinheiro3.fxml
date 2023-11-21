@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.ContasDinheiroController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.ContasDinheiroController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #81a0a0;" VBox.vgrow="ALWAYS">
          <children>
@@ -47,8 +47,8 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txfSaldoInicial" layoutX="57.0" layoutY="295.0" promptText="Insira uma quantia inicial" />
-            <Label layoutX="57.0" layoutY="275.0" text="Saldo inicial:" textFill="WHITE">
+            <TextField fx:id="txfSaldoInicial" layoutX="57.0" layoutY="282.0" promptText="Insira uma quantia inicial" />
+            <Label layoutX="57.0" layoutY="261.0" text="Saldo inicial:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -64,7 +64,12 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Button layoutX="499.0" layoutY="295.0" mnemonicParsing="false" onAction="#criarConta" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Adicionar" textFill="WHITE">
+            <Button layoutX="513.0" layoutY="316.0" mnemonicParsing="false" onAction="#criarConta" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Adicionar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="43.0" layoutY="323.0" mnemonicParsing="false" onAction="#voltarMenu" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Voltar ao menu" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

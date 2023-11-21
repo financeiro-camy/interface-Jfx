@@ -1,7 +1,10 @@
 package com.example.javafxproject;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
 import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -14,6 +17,8 @@ import DAO.UsuarioDAO;
 
 
 public class CadastroController {
+    
+
 
     @FXML
     private TextField txfNome;
@@ -28,6 +33,8 @@ public class CadastroController {
     private PasswordField txfSenhaTeste;
        
     Propriedades propriedades = new Propriedades();
+
+   
 
     public void Cadastrar() throws IOException, SQLException {
         String nome = txfNome.getText();
@@ -65,6 +72,7 @@ public class CadastroController {
     }
 
     public void onActionLogin() throws IOException {
+        
         propriedades.ScreenGuider("tela-login3.fxml","Login");
     }
     

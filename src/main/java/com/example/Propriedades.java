@@ -39,7 +39,7 @@ public class Propriedades{
     public void setoresPadroes(int id_usuario) throws SQLException {
         System.out.println("ID do Usuário: " + id_usuario);
     
-        /*Categoria categoria1 = new Categoria(id_usuario, "Alimentação");
+       /*  Categoria categoria1 = new Categoria(id_usuario, "Alimentação");
         Categoria categoria2 = new Categoria(id_usuario, "Transporte");
         Categoria categoria3 = new Categoria(id_usuario, "Lazer");
         Categoria categoria4 = new Categoria(id_usuario, "Moradia");

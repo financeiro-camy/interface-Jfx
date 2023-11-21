@@ -123,8 +123,8 @@ public class MenuController {
     }
 
     @FXML
-    public void verProjetos(){
-
+    public void adicionarProjeto() throws IOException{
+        propriedades.ScreenGuider("tela-projetocofrinho3.fxml","Adcionar um projeto cofrinho");
     }
 
     @FXML
@@ -137,4 +137,13 @@ public class MenuController {
         propriedades.ScreenGuider("tela-despesa1.fxml","Formulario Despesa");
     }
 
+    @FXML 
+    public void adicionarConta() throws IOException{
+        propriedades.ScreenGuider("tela-contasdinheiro3.fxml","Cadastrar uma nova conta");
+    }
+
+    @FXML
+    public void adicionarQuantia() throws IOException{
+        propriedades.ScreenGuider("tela-relatorioPC1.fxml","Tela Cadastrar Conta");
+    }
 }

@@ -177,21 +177,28 @@ public class DespesaController {
             Boolean isPaid = despesaCKB.isSelected();
             int billParcelas = Integer.parseInt(numeroParcelas.getText());
 
-            Lancamento lancamento = new Lancamento(selectedCategoryId,selectedAccountId,selectedPeriodicityId,billName,billDescription,billPrice,"despesa",billParcelas,billDeadline,isPaid,billPayment);
-            LancamentoDAO lancamentoDAO = new LancamentoDAO();
-            lancamentoDAO.create(lancamento);
+            HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
+            double saldoAtual = historicoSaldosDAO.buscarValorAtivoPorIdConta(selectedAccountId);
+
+            if (saldoAtual >= billPrice) {
+                Lancamento lancamento = new Lancamento(selectedCategoryId, selectedAccountId, selectedPeriodicityId, billName, billDescription, billPrice, "despesa", billParcelas, billDeadline, isPaid, billPayment);
+                LancamentoDAO lancamentoDAO = new LancamentoDAO();
+                lancamentoDAO.create(lancamento);
 
             if (lancamento.isPago()==true){
-            HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
-            historicoSaldosDAO.atualizarSaldo(billPrice, "despesa", selectedAccountId);
+                historicoSaldosDAO.atualizarSaldo(billPrice, "despesa", selectedAccountId);
             }
-
             propriedades.exibirAlerta("Despesa cadastrada com sucesso!", "Sua despesa foi cadastrada com sucesso!");
             limparAtributosDespesa();
 
-        } else {
-            System.out.println("Deu erro, amigão");
-        }
+            } else {
+                propriedades.exibirAlerta("Saldo insuficiente", "O saldo atual não é suficiente para essa despesa.");
+                limparAtributosDespesa();
+
+            }
+            } else {
+                System.out.println("Deu erro, amigão");
+            }
     }
 
     @FXML

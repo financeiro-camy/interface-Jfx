@@ -11,6 +11,7 @@ import DAO.HistoricoSaldos;
 import DAO.HistoricoSaldosDAO;
 import DAO.UsuarioAtributoDAO;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import com.example.Propriedades;
 
@@ -75,4 +76,9 @@ public class ContasDinheiroController {
             propriedades.exibirAlerta("Erro", "Erro ao criar conta: " + e.getMessage());
         }
     }  
+
+    @FXML
+    public void voltarMenu() throws IOException{
+        propriedades.ScreenGuider("tela-menu3", "Tela Menu");
+    }
 }

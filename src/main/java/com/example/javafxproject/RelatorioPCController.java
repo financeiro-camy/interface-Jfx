@@ -126,20 +126,25 @@ public class RelatorioPCController {
     System.out.println("Conta: " + selectedAccountId);
     System.out.println("Projeto selecionado:"+selectedProjectId);
 
-    RelatorioPC relatorio = new RelatorioPC(selectedProjectId,selectedAccountId,valorInsercao,dataTransacao);
-    RelatorioPCDAO relatorioPCDAO = new RelatorioPCDAO();
-    relatorioPCDAO.create(relatorio);
-
-    System.out.println(selectedAccountId);
     HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
-    historicoSaldosDAO.atualizarSaldo(valorInsercao, "projeto", selectedAccountId);
+    double saldo = historicoSaldosDAO.buscarValorAtivoPorIdConta(selectedAccountId);
 
-    propriedades.exibirAlerta("Inserção realiza do sucesso!", "Sua inserçaõ foi relalizada com sucesso.");
-    //limparCampos();
+    if (valorInsercao <= saldo) {
+        RelatorioPC relatorio = new RelatorioPC(selectedProjectId, selectedAccountId, valorInsercao, dataTransacao);
+        RelatorioPCDAO relatorioPCDAO = new RelatorioPCDAO();
+        relatorioPCDAO.create(relatorio);
 
-  } else {
+        historicoSaldosDAO.atualizarSaldo(valorInsercao, "projeto", selectedAccountId);
+
+        propriedades.exibirAlerta("Inserção realizada com sucesso!", "Sua inserção foi realizada com sucesso.");
+        //limparCampos();
+    } else {
+        propriedades.exibirAlerta("Saldo insuficiente", "Esta conta não possui saldo suficiente para realizar esta inserção. Por favor, tente novamente com outra conta.");
+        limparCampos();
+    }
+} else {
     System.out.println("Deu erro, amigão");
-}       
+}          
   }
 
   @FXML

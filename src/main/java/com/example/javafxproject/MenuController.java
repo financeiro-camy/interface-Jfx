@@ -38,6 +38,8 @@ public class MenuController {
 
     // AS OUTRAS DUAS FOTOS DEVERIAM SEGUIR A MESMA LÓGICA
 
+    //Oi carlos, coloca a comboBox aqui 
+
     @FXML
     private Label mensagemBemVindo;
 

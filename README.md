@@ -32,6 +32,16 @@ Este projeto foi desenvolvido para avaliação nas disciplinas de Linguagem de P
 - Tela Menu 
 - Tela Logout
 
+ #### DAO'S: 
+
+- UsuarioDAO: gerencia o armazenamento das informações da tabela Usuario
+
+- UsuarioAtributoDAO: gerencia o armazenamento das informações da tabela UsuarioAtributoDAO (é usada para armazenar o id do usuário logado) 
+
+- CategoriaDAO: gerencia as informações armazenadas da tabela Categoria 
+
+- PeriodicidadeDAO: gerencia as informações armazenadas da tabela Periodicidade
+
 ## Autores
 
 - [@ca12loss](https://github.com/ca12loss): *Carlos Alberto*

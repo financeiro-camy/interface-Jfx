@@ -79,6 +79,6 @@ public class ContasDinheiroController {
 
     @FXML
     public void voltarMenu() throws IOException{
-        propriedades.ScreenGuider("tela-menu3", "Tela Menu");
+        propriedades.ScreenGuider("tela-menu3.fxml", "Tela Menu");
     }
 }

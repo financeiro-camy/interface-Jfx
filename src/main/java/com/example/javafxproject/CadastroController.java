@@ -4,16 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.sql.SQLException;
-
 import org.mindrot.jbcrypt.BCrypt;
-
 import com.example.Propriedades;
-
 import java.io.IOException;
 import DAO.Usuario;
 import DAO.UsuarioDAO;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 
 public class CadastroController {
@@ -41,17 +40,14 @@ public class CadastroController {
         String email = txfEmail.getText();
         String senha = txfSenha.getText();
         String senhaTeste = txfSenhaTeste.getText();
-    
-        if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || senhaTeste.isEmpty()) {
-            propriedades.exibirAlerta("Campos Vazios", "Preencha todos os campos");
-        } else if (!senha.equals(senhaTeste)) {
-            propriedades.exibirAlerta("Senhas não coincidem", "As senhas não coincidem");
-        } else {
-            UsuarioDAO userDAO = new UsuarioDAO();
-            
-            boolean emailExistente = userDAO.verificarEmailExistente(email);
-            if (emailExistente) {
-                propriedades.exibirAlerta("Email já cadastrado", "O email já está cadastrado");
+               UsuarioDAO userDAO = new UsuarioDAO();
+ 
+               if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || senhaTeste.isEmpty()) {
+                propriedades.exibirAlerta("Campos Vazios", "Preencha todos os campos");
+            } else if (!isValidEmail(email)) {
+                propriedades.exibirAlerta("Email Inválido", "Insira um email válido");
+            } else if (!senha.equals(senhaTeste)) {
+                propriedades.exibirAlerta("Senhas não coincidem", "As senhas não coincidem");
             } else {
                 String hashedPassword = BCrypt.hashpw(senha, BCrypt.gensalt());
                 Usuario user = new Usuario(nome, email, hashedPassword, true);
@@ -64,7 +60,7 @@ public class CadastroController {
                 CriarPrimeiraConta();
             }
         }
-    }
+    
     
 
     public void CriarPrimeiraConta() throws IOException {
@@ -74,6 +70,15 @@ public class CadastroController {
     public void onActionLogin() throws IOException {
         
         propriedades.ScreenGuider("tela-login3.fxml","Login");
+    }
+
+    public static boolean isValidEmail(String email) {
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
     }
     
 }

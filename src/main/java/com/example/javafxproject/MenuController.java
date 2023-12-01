@@ -65,6 +65,8 @@ public class MenuController {
     public void initialize() throws SQLException, IOException {
         String nomeUsuario = obterNomeUsuarioLogado(); 
         configurarMensagemBemVindo(nomeUsuario);
+        System.out.println("Inicializando o controlador ProgressoPCController...");
+
         carregarContas();
 
     }

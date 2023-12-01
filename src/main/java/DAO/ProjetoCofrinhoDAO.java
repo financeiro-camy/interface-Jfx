@@ -194,7 +194,60 @@ public class ProjetoCofrinhoDAO {
             return null;
         }
     }
+
+
+
+    public double calcularQuantiaRestante(int idProjetoCofrinho) {
+        String sql = "SELECT pc.meta_quantia - COALESCE(SUM(rpc.valor), 0) AS diferenca " +
+                     "FROM ProjetoCofrinho pc " +
+                     "LEFT JOIN RelatorioPC rpc ON rpc.id_cofrinho = pc.id " +
+                     "WHERE pc.id = ? " +
+                     "GROUP BY pc.meta_quantia;";
+        
+        double quantiaRestante = 0.0;
     
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idProjetoCofrinho);
+    
+            ResultSet rs = statement.executeQuery();
+    
+            if (rs.next()) {
+                quantiaRestante = rs.getDouble("diferenca");
+            }
+    
+            rs.close();
+    
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+        return quantiaRestante;
+    }
+    
+    public double calcularValorAtingido(int projetoId)  {
+        double valorAtingido = 0.0;
+        String sql = "SELECT SUM(rpc.valor) " +
+                       "FROM ProjetoCofrinho pc " +
+                       "LEFT JOIN RelatorioPC rpc ON rpc.id_cofrinho = pc.id " +
+                       "WHERE pc.id = ?";
+
+        try  {
+            Connection connection = Conexao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, projetoId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                valorAtingido = resultSet.getDouble(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return valorAtingido;
+    }
 
     
     private ProjetoCofrinho resultSetToProjetoCofrinho(ResultSet rs) throws SQLException {

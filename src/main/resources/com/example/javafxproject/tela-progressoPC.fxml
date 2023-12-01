@@ -11,7 +11,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #ffff;" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="40.0" layoutY="75.0" prefHeight="18.0" prefWidth="42.0" text="Nome: " />
+            <Label layoutX="41.0" layoutY="65.0" prefHeight="18.0" prefWidth="42.0" text="Nome: " />
             <Label layoutX="40.0" layoutY="136.0" prefHeight="18.0" prefWidth="100.0" text="Descrição:" />
             <Label layoutX="340.0" layoutY="101.0" prefHeight="18.0" prefWidth="42.0" text="Meta:" />
             <Label layoutX="340.0" layoutY="171.0" text="Prazo: " />
@@ -19,15 +19,17 @@
             <Label layoutX="245.0" layoutY="30.0" prefHeight="18.0" prefWidth="160.0" text="Selecione o projeto desejado: " />
             <Label layoutX="40.0" layoutY="237.0" prefHeight="18.0" prefWidth="91.0" text="Valor atingido : " />
             <Label layoutX="336.0" layoutY="237.0" prefHeight="18.0" prefWidth="91.0" text="Valor restante : " />
-            <Label layoutX="31.0" layoutY="299.0" prefHeight="18.0" prefWidth="100.0" text="Status : " />
+            <Label layoutX="31.0" layoutY="299.0" prefHeight="18.0" prefWidth="42.0" text="Status : " />
             <ProgressBar fx:id="progressPJ" layoutX="40.0" layoutY="318.0" prefWidth="200.0" progress="0.0" />
-            <Button layoutX="504.0" layoutY="349.0" mnemonicParsing="false"  text="Adicionar quantia" />
+            <Button layoutX="504.0" layoutY="349.0" mnemonicParsing="false" onAction="#adicionarQuantia" text="Adicionar quantia" />
             <Label fx:id="lblprojeto" layoutX="41.0" layoutY="102.0" prefHeight="18.0" prefWidth="200.0" text="..." />
             <Label fx:id="lbldescricao" layoutX="40.0" layoutY="170.0" prefHeight="18.0" prefWidth="200.0" text="..." />
             <Label fx:id="lblatingido" layoutX="131.0" layoutY="237.0" prefHeight="18.0" prefWidth="100.0" text="..." />
             <Label fx:id="lblmeta" layoutX="377.0" layoutY="101.0" prefHeight="18.0" prefWidth="100.0" text="..." />
             <Label fx:id="lblprazo" layoutX="377.0" layoutY="170.0" prefHeight="18.0" prefWidth="100.0" text="..." />
             <Label fx:id="lblrestante" layoutX="419.0" layoutY="237.0" prefHeight="18.0" prefWidth="100.0" text="..." />
+            <Label fx:id="lblpercentual" layoutX="73.0" layoutY="299.0" prefHeight="18.0" prefWidth="42.0" text="..." />
+            <Label layoutX="106.0" layoutY="299.0" prefHeight="18.0" prefWidth="17.0" text="\%" />
          </children>
     </AnchorPane>
   </children>

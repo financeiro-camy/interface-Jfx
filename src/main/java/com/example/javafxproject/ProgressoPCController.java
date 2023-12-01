@@ -37,6 +37,9 @@ public class ProgressoPCController {
     @FXML 
     private Label lblrestante;
 
+    @FXML
+    private Label lblpercentual;
+
     @FXML 
     private ComboBox<String> projetoComboBox;
 
@@ -101,12 +104,16 @@ public class ProgressoPCController {
                 lblatingido.setText(String.valueOf(valorAtingido));
                 lblrestante.setText(String.valueOf(valorRestante));
 
-                // Normalização dos valores
-                double total = projetoSelecionado.getMeta_quantia(); // Valor máximo da ProgressBar
+                double total = projetoSelecionado.getMeta_quantia(); 
 
                 double valorAtingidoNormalizado = valorAtingido / total;
 
                 progressPJ.setProgress(valorAtingidoNormalizado);
+
+                double percentual = (valorAtingido*100)/total;
+
+                lblpercentual.setText(String.valueOf(percentual));
+
             }
         });
     }

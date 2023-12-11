@@ -28,20 +28,16 @@ public class ProjetoCofrinhoController {
     @FXML
     private TextField metaQuantiaField; 
 
-	@FXML
-    private CheckBox ckbAtivo;
-
     UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
     Propriedades propriedades = new Propriedades();
     
-    @FXML
+    /* @FXML
     private void criarProjeto() throws SQLException {
         String nome = nomeTextField.getText();
         String descricao = descricaoTextField.getText();
         LocalDate dataSelecionada = prazo.getValue();
         LocalDate dataCriacao = LocalDate.now();
         double valorMeta = Double.parseDouble(metaQuantiaField.getText());
-        Boolean projetoAtivo = ckbAtivo.isSelected();
 
         try {
            if  (valorMeta < 1) {
@@ -51,7 +47,7 @@ public class ProjetoCofrinhoController {
                     UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
                     int idlogado = ua.findSessaoId();
         
-                    ProjetoCofrinho projetoCofrinho = new ProjetoCofrinho(idlogado, nome, descricao, dataSelecionada, dataCriacao, valorMeta, projetoAtivo);
+                    ProjetoCofrinho projetoCofrinho = new ProjetoCofrinho(idlogado, nome, descricao, dataSelecionada, dataCriacao, valorMeta, true);
                     ProjetoCofrinhoDAO projetoCofrinhoDAO = new ProjetoCofrinhoDAO();
                     projetoCofrinhoDAO.create(projetoCofrinho);
         
@@ -63,7 +59,41 @@ public class ProjetoCofrinhoController {
             }
             
             }
+*/
 
+@FXML
+    private void criarProjeto() throws SQLException {
+        String nome = nomeTextField.getText();
+        String descricao = descricaoTextField.getText();
+        LocalDate dataSelecionada = prazo.getValue();
+        LocalDate dataCriacao = LocalDate.now();
+        double valorMeta = Double.parseDouble(metaQuantiaField.getText());
+
+        try {
+            if (valorMeta < 1) {
+                propriedades.exibirAlerta("Valor inválido", "A meta deve ser maior que zero.");
+            } else {
+                UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+                int idlogado = ua.findSessaoId();
+
+                ProjetoCofrinhoDAO projetoCofrinhoDAO = new ProjetoCofrinhoDAO();
+
+                int idProjetoExistente = projetoCofrinhoDAO.findIdByUserIdAndName(nome, idlogado);
+                if (idProjetoExistente != -1) {
+                    propriedades.exibirAlerta("Erro", "Já existe um projeto com esse nome para este usuário.");
+                } else {
+
+                ProjetoCofrinho projetoCofrinho = new ProjetoCofrinho(idlogado, nome, descricao, dataSelecionada, dataCriacao, valorMeta, true);
+                projetoCofrinhoDAO.create(projetoCofrinho);
+                propriedades.exibirAlerta("Sucesso", "Projeto criado com sucesso!");
+                }
+            }
+
+        } catch (SQLException e) {
+            propriedades.exibirAlerta("Erro", "Erro ao criar projeto: " + e.getMessage());
+        }
+    }
+    
     public void MenuPC() throws IOException{
         propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
     }

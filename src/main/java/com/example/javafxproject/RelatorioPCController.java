@@ -10,9 +10,14 @@ import java.util.List;
 
 import com.example.Propriedades;
 
+import DAO.Categoria;
+import DAO.CategoriaDAO;
 import DAO.ContasDinheiro;
 import DAO.ContasDinheiroDAO;
 import DAO.HistoricoSaldosDAO;
+import DAO.Lancamento;
+import DAO.LancamentoDAO;
+import DAO.PeriodicidadeDAO;
 import DAO.ProjetoCofrinho;
 import DAO.ProjetoCofrinhoDAO;
 import DAO.RelatorioPC;
@@ -84,7 +89,7 @@ public class RelatorioPCController {
         UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
         int user_id = ua.findSessaoId();
 
-        List<ProjetoCofrinho> projetos = projetoDAO.findProjectsByUserId(user_id);
+        List<ProjetoCofrinho> projetos = projetoDAO.findActiveProjects(user_id);
 
         projetoComboBox.getItems().clear();
 
@@ -115,6 +120,9 @@ public class RelatorioPCController {
 
   @FXML
   public void InserirValor() throws SQLException {
+     UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+        int user_id = ua.findSessaoId();
+
  if (selectedAccountId != -1 && selectedProjectId != -1) { 
 	  
     double valorInsercao = Double.parseDouble(txfQuantia.getText());
@@ -130,11 +138,27 @@ public class RelatorioPCController {
     double saldo = historicoSaldosDAO.buscarValorAtivoPorIdConta(selectedAccountId);
 
     if (valorInsercao <= saldo) {
-        RelatorioPC relatorio = new RelatorioPC(selectedProjectId, selectedAccountId, valorInsercao, dataTransacao);
+       /* RelatorioPC relatorio = new RelatorioPC(selectedProjectId, selectedAccountId, valorInsercao, dataTransacao);
         RelatorioPCDAO relatorioPCDAO = new RelatorioPCDAO();
-        relatorioPCDAO.create(relatorio);
+        relatorioPCDAO.create(relatorio); */
 
-        historicoSaldosDAO.atualizarSaldo(valorInsercao, "projeto", selectedAccountId);
+       // historicoSaldosDAO.atualizarSaldo(valorInsercao, "projeto", selectedAccountId);
+
+       double insertedValue = historicoSaldosDAO.insertedValueProject(valorInsercao,selectedProjectId,selectedAccountId);
+       historicoSaldosDAO.atualizarSaldoProjetos(valorInsercao, selectedProjectId,selectedAccountId,dataTransacao); 
+
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        int category = categoriaDAO.buscarIdCategoria("Projeto", user_id);
+
+        PeriodicidadeDAO periodicidadeDAO = new PeriodicidadeDAO();
+        int periodicity = periodicidadeDAO.buscarIdPeriodicidade("Eventualmente", user_id);
+        System.out.println("Periodicidade: " + periodicity);
+        ProjetoCofrinhoDAO projetoCofrinhoDAO = new ProjetoCofrinhoDAO();
+        String nomeProjeto = "Projeto Cofrinho: " + projetoCofrinhoDAO.findProjectName(selectedProjectId);
+
+        Lancamento lancamento = new Lancamento(category,selectedAccountId, periodicity,nomeProjeto,"depósito do projeto",insertedValue,"projeto",1,dataTransacao,true,dataTransacao); 
+        LancamentoDAO lancamentoDAO = new LancamentoDAO();
+        lancamentoDAO.create(lancamento);
 
         propriedades.exibirAlerta("Inserção realizada com sucesso!", "Sua inserção foi realizada com sucesso.");
         //limparCampos();

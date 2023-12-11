@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 
-import com.example.Propriedades;
 
 import java.sql.Date;
 
@@ -174,6 +173,56 @@ public class HistoricoSaldosDAO {
     historicoSaldosDAO.create(historicoSaldos);
 }
 
+public void atualizarSaldoProjetos(double valor, int projeto, int id_conta, LocalDate dataTransacao) throws SQLException {
+    HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
+    ProjetoCofrinhoDAO projetoCofrinhoDAO = new ProjetoCofrinhoDAO();
+
+    double saldo = historicoSaldosDAO.buscarValorAtivoPorIdConta(id_conta);
+    int id_desatual = historicoSaldosDAO.buscarIdAtivoPorIdConta(id_conta);
+    double valorArrecadadoProjeto = projetoCofrinhoDAO.calcularValorAtingido(projeto);
+    double valorMetaProjeto = projetoCofrinhoDAO.findMetaQuantiaById(projeto);
+
+    double saldonovo;
+
+    double valorNecessario = valorMetaProjeto - valorArrecadadoProjeto;
+
+    if (valor > valorNecessario){
+        saldonovo = saldo - valorNecessario;
+        RelatorioPC relatorioPC = new RelatorioPC(projeto,id_conta,valorNecessario, dataTransacao);
+        RelatorioPCDAO relatorioPCDAO = new RelatorioPCDAO();
+        relatorioPCDAO.createAlternative(relatorioPC,valorMetaProjeto,valorArrecadadoProjeto);
+
+    } else {
+        saldonovo = saldo - valor;
+        RelatorioPC relatorioPC = new RelatorioPC(projeto,id_conta, valor, dataTransacao);
+        RelatorioPCDAO relatorioPCDAO = new RelatorioPCDAO();
+        relatorioPCDAO.createAlternative(relatorioPC,valorMetaProjeto,valorArrecadadoProjeto);
+
+    }
+
+    historicoSaldosDAO.atualizarAtivoParaFalse(id_desatual);
+
+    LocalDate dataRegistro = LocalDate.now();
+    HistoricoSaldos historicoSaldos = new HistoricoSaldos(id_conta, dataRegistro, saldonovo, true);
+
+    historicoSaldosDAO.create(historicoSaldos);
+
+}
+
+public double insertedValueProject(double valor, int projeto, int id_conta){
+    ProjetoCofrinhoDAO projetoCofrinhoDAO = new ProjetoCofrinhoDAO();
+
+    double valorArrecadadoProjeto = projetoCofrinhoDAO.calcularValorAtingido(projeto);
+    double valorMetaProjeto = projetoCofrinhoDAO.findMetaQuantiaById(projeto);
+
+    double valorNecessario = valorMetaProjeto - valorArrecadadoProjeto;
+
+    if (valor > valorNecessario){
+        return valorNecessario;
+    } else {
+        return valor;
+    }
+}
 
 
     public HistoricoSaldos resultSetToHistoricoSaldos(ResultSet rs) throws SQLException {

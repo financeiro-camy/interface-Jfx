@@ -9,16 +9,20 @@ import com.example.Propriedades;
 import DAO.ContasDinheiro;
 import DAO.ContasDinheiroDAO;
 import DAO.HistoricoSaldosDAO;
+import DAO.ProjetoCofrinho;
+import DAO.ProjetoCofrinhoDAO;
 import DAO.UsuarioAtributoDAO;
 import DAO.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
 
 public class MenuController {
 
     private int selectedAccountId = -1;
+    private int selectedProjectId = -1;
 
     @FXML
     private Label lblsaldo;
@@ -28,6 +32,12 @@ public class MenuController {
 
     @FXML
     private Label mensagemBemVindo;
+
+    @FXML
+    private ComboBox<String> projectComboBox;
+
+    @FXML
+    private ProgressBar progressProject;
 
     private UsuarioAtributoDAO ua;
     private UsuarioDAO userDAO;
@@ -68,7 +78,7 @@ public class MenuController {
         System.out.println("Inicializando o controlador ProgressoPCController...");
 
         carregarContas();
-
+        carregarProjetos();
     }
 
    
@@ -109,12 +119,54 @@ public class MenuController {
         });
     }
 
+
      public void atualizarSaldoContaSelecionada() throws SQLException {
         if (selectedAccountId != -1) {
             HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO(); 
             double saldo = historicoSaldosDAO.buscarValorAtivoPorIdConta(selectedAccountId);
             lblsaldo.setText("R$ " + saldo); 
         }
+    }
+
+     public void carregarProjetos() throws SQLException{
+       ProjetoCofrinhoDAO projetoDAO = new ProjetoCofrinhoDAO();
+        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
+        int user_id = ua.findSessaoId();
+
+        List<ProjetoCofrinho> projetos = projetoDAO.findActiveProjects(user_id);
+
+        projectComboBox.getItems().clear();
+
+        projectComboBox.getItems().add("Adicionar");
+
+        for (ProjetoCofrinho projeto : projetos) {
+            projectComboBox.getItems().add(projeto.getNome());
+        }
+
+        projectComboBox.setOnAction(event -> {
+            String selectedProject = projectComboBox.getSelectionModel().getSelectedItem();
+            if (selectedProject.equals("Adicionar")) {
+                try {
+                    propriedades.ScreenGuider("tela-projetocofrinho3.fxml", "Adicionar Projeto Cofrinho");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                ProjetoCofrinhoDAO outraInstanciaProjetosDAO = new ProjetoCofrinhoDAO();
+                int projectId = outraInstanciaProjetosDAO.findIdByUserIdAndName(selectedProject,user_id);
+                System.out.println("ID do projeto selecionado: " + projectId);
+
+                selectedProjectId = projectId;
+
+                ProjetoCofrinho projetoSelecionado = outraInstanciaProjetosDAO.findById(selectedProjectId);
+
+                double valorAtingido = outraInstanciaProjetosDAO.calcularValorAtingido(selectedProjectId);  
+                double total = projetoSelecionado.getMeta_quantia(); 
+                double valorAtingidoNormalizado = valorAtingido / total;
+                progressProject.setProgress(valorAtingidoNormalizado);
+
+            }
+        });
     }
 
 
@@ -147,5 +199,10 @@ public class MenuController {
     @FXML
     public void adicionarQuantia() throws IOException{
         propriedades.ScreenGuider("tela-relatorioPC1.fxml","Tela Cadastrar Conta");
+    }
+
+    @FXML
+    public void acompanharProgresso() throws IOException{
+        propriedades.ScreenGuider("tela-progressoPC.fxml","Tela Progresso do Projeto Cofrinho");
     }
 }

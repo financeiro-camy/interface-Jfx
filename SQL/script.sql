@@ -54,7 +54,7 @@ CREATE TABLE Lancamento (
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(500),
     valor DECIMAL(10, 2) NOT NULL,
-    tipo ENUM('despesa', 'receita') NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
     numero_parcelas INT,
     data_vencimento DATE,
     pago BOOLEAN NOT NULL,
@@ -64,6 +64,7 @@ CREATE TABLE Lancamento (
     FOREIGN KEY (id_conta) REFERENCES ContasDinheiro(id),
     FOREIGN KEY (id_periodicidade) REFERENCES Periodicidade(id)
 );
+
 
 CREATE TABLE ProjetoCofrinho (
     id INT AUTO_INCREMENT,

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -60,14 +61,14 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
-            <Pane layoutX="491.0" prefHeight="400.0" prefWidth="149.0" style="-fx-background-color: #c4cfcc;">
+            <Pane layoutX="483.0" prefHeight="400.0" prefWidth="158.0" style="-fx-background-color: #c4cfcc;">
                <children>
-                  <ImageView fitHeight="47.0" fitWidth="53.0" layoutX="53.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="47.0" fitWidth="53.0" layoutX="53.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@usuariofoto.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="56.0" fitWidth="47.0" layoutX="53.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="56.0" fitWidth="47.0" layoutX="53.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@configuracaofoto.png" />
                      </image>
@@ -77,11 +78,23 @@
                         <Font name="System Bold" size="10.0" />
                      </font>
                   </Button>
-                  <Button layoutX="6.0" layoutY="185.0" mnemonicParsing="false" onAction="#adicionarConta" prefHeight="26.0" prefWidth="138.0" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Adicionar conta" textFill="WHITE">
+                  <Button layoutX="7.0" layoutY="143.0" mnemonicParsing="false" onAction="#adicionarConta" prefHeight="26.0" prefWidth="138.0" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Adicionar conta" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
+                  <ComboBox fx:id="projectComboBox" layoutX="7.0" layoutY="227.0" prefHeight="31.0" prefWidth="138.0" promptText="Escolha o projeto" style="-fx-background-color: #D2E2FF; -fx-background-radius: 15px;" />
+                  <Label layoutX="5.0" layoutY="200.0" prefHeight="27.0" prefWidth="149.0" text="Andamento do cofrinho" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="progressProject" layoutX="55.0" layoutY="281.0" prefHeight="18.0" prefWidth="89.0" progress="0.0" style="-fx-accent: #ffafaf;" />
+                  <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="2.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@cofrinhofinal.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Button layoutX="280.0" layoutY="266.0" mnemonicParsing="false" onAction="#adicionarDespesa" style="-fx-background-color: #ffafaf; -fx-background-radius: 15px;" text="Despesa" textFill="WHITE">
@@ -107,6 +120,11 @@
                </font>
             </Label>
             <Button layoutX="36.0" layoutY="266.0" mnemonicParsing="false" onAction="#adicionarQuantia" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Adicionar quantia" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="38.0" layoutY="305.0" mnemonicParsing="false" onAction="#acompanharProgresso" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Acompanhar progresso" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

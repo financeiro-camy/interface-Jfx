@@ -118,6 +118,32 @@ public class ProjetoCofrinhoDAO {
         return null;
     }
 
+    public String findProjectName(Integer id) {
+        String sql = "SELECT nome FROM ProjetoCofrinho WHERE id = ?;";
+    
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, id);
+            
+            ResultSet rs = statement.executeQuery();
+    
+            if (rs.next()) {
+                return rs.getString("nome");
+            }
+    
+            rs.close();
+    
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    
+        return null;
+    }
+
+ 
     public int findIdByUserIdAndName(String nomeProjeto, int idUsuario) {
         String sql = "SELECT id FROM ProjetoCofrinho WHERE nome = ? AND id_usuario = ?;";
         int id = -1; 
@@ -171,6 +197,32 @@ public class ProjetoCofrinhoDAO {
 
     public List<ProjetoCofrinho> findProjectsByUserId(Integer idUsuario) {
         String sql = "SELECT * FROM ProjetoCofrinho WHERE id_usuario = ?;";
+        List<ProjetoCofrinho> projetos = new ArrayList<>();
+    
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idUsuario);
+    
+            ResultSet rs = statement.executeQuery();
+    
+            while (rs.next()) {
+                projetos.add(resultSetToProjetoCofrinho(rs));
+            }
+    
+            rs.close();
+            
+            return projetos;
+    
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<ProjetoCofrinho> findActiveProjects(Integer idUsuario) {
+        String sql = "SELECT * FROM ProjetoCofrinho WHERE ativo = 1 AND id_usuario = ?;";
         List<ProjetoCofrinho> projetos = new ArrayList<>();
     
         try (
@@ -249,6 +301,56 @@ public class ProjetoCofrinhoDAO {
         return valorAtingido;
     }
 
+    public double findMetaQuantiaById(int id) {
+        String sql = "SELECT meta_quantia FROM ProjetoCofrinho WHERE id = ?;";
+        double metaQuantia = 0;
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                metaQuantia = rs.getDouble("meta_quantia");
+            }
+
+            rs.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return metaQuantia;
+    }
+
+    public void atualizarAtivoParaTrue(int projetoId) {
+        String sql = "UPDATE ProjetoCofrinho SET ativo = true WHERE id = ?;";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, projetoId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void verificarEAtualizarAtivoAtingido(int projetoId) {
+        double valorAtingido = calcularValorAtingido(projetoId);
+        double meta = findMetaQuantiaById(projetoId);
+
+        if (valorAtingido >= meta) {
+            atualizarAtivoParaTrue(projetoId);
+        }
+    }
+
+    
+    
     
     private ProjetoCofrinho resultSetToProjetoCofrinho(ResultSet rs) throws SQLException {
         return new ProjetoCofrinho(

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -49,12 +48,12 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="338.0" layoutY="175.0" text="Vencimento:" textFill="WHITE">
+            <Label layoutX="350.0" layoutY="230.0" text="Vencimento:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <DatePicker fx:id="prazo" layoutX="338.0" layoutY="195.0" prefHeight="31.0" prefWidth="263.0" promptText="Data estimada para o objetivo" style="-fx-background-radius: 5px;" />
+            <DatePicker fx:id="prazo" layoutX="350.0" layoutY="250.0" prefHeight="31.0" prefWidth="263.0" promptText="Data estimada para o objetivo" style="-fx-background-radius: 5px;" />
             <Label layoutX="303.0" layoutY="365.0" text="2023" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -70,22 +69,17 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="metaQuantiaField" layoutX="50.0" layoutY="302.0" promptText="Mínimo de R$1,00" />
-            <Label layoutX="52.0" layoutY="281.0" text="Valor da meta:" textFill="WHITE">
+            <TextField fx:id="metaQuantiaField" layoutX="350.0" layoutY="198.0" promptText="Mínimo de R$1,00" />
+            <Label layoutX="350.0" layoutY="175.0" text="Valor da meta:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="338.0" layoutY="240.0" text="Este projeto está ativo?" textFill="WHITE">
+            <Label layoutX="338.0" layoutY="240.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <CheckBox fx:id="ckbAtivo" layoutX="338.0" layoutY="266.0" mnemonicParsing="false" text="Clique se sim" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </CheckBox>
             <ImageView fitHeight="88.0" fitWidth="88.0" layoutX="438.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@projetocofrinho.png" />

@@ -40,12 +40,16 @@ public class ProgressoPCController {
     @FXML
     private Label lblpercentual;
 
+    @FXML
+    private Label lblAtivo;
+
     @FXML 
     private ComboBox<String> projetoComboBox;
 
     
     @FXML
     private ProgressBar progressPJ;
+
 
     Propriedades propriedades = new Propriedades();
 
@@ -104,10 +108,14 @@ public class ProgressoPCController {
                 lblatingido.setText(String.valueOf(valorAtingido));
                 lblrestante.setText(String.valueOf(valorRestante));
 
+                if (projetoSelecionado.isAtivo()==false){
+                    lblAtivo.setText("Parabéns! Você já alcançou a sua meta!");
+                } else {
+                    lblAtivo.setText("Projeto está ativo! Você ainda está no caminho!");
+                }
+
                 double total = projetoSelecionado.getMeta_quantia(); 
-
                 double valorAtingidoNormalizado = valorAtingido / total;
-
                 progressPJ.setProgress(valorAtingidoNormalizado);
 
                 double percentual = (valorAtingido*100)/total;

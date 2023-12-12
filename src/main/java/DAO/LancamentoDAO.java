@@ -128,6 +128,71 @@ public class LancamentoDAO {
         return lancamentos;
     }
 
+    public double calcularGastosSemana(int idConta) throws SQLException {
+        String sql = "SELECT SUM(l.valor) AS TotalGastos " +
+                     "FROM ContasDinheiro cd " +
+                     "INNER JOIN Lancamento l ON cd.id = l.id_conta " +
+                     "WHERE cd.id = ? " +
+                     "AND (l.tipo = 'despesa' OR l.tipo = 'projeto') " +
+                     "AND l.data_pagamento >= " +
+                     "  CASE " +
+                     "    WHEN DAYOFWEEK(CURDATE()) = 2 THEN CURDATE() " +
+                     "    ELSE DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) - INTERVAL 6 DAY " +
+                     "  END " +
+                     "AND l.data_pagamento < " +
+                     "  CASE " +
+                     "    WHEN DAYOFWEEK(CURDATE()) = 2 THEN CURDATE() + INTERVAL 1 WEEK " +
+                     "    ELSE DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) + INTERVAL 1 WEEK " +
+                     "  END;";
+        
+        double totalGastos = 0.0;
+        
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idConta);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                totalGastos = rs.getDouble("TotalGastos");
+            }
+
+            rs.close();
+        }
+
+        return totalGastos;
+    }
+
+    public double calcularGastosMes(int contaId) throws SQLException {
+        String sql = "SELECT SUM(l.valor) AS TotalGastos " +
+                     "FROM ContasDinheiro cd " +
+                     "INNER JOIN Lancamento l ON cd.id = l.id_conta " +
+                     "WHERE cd.id = ? " +
+                     "AND (l.tipo = 'despesa' OR l.tipo = 'projeto') " +
+                     "AND MONTH(l.data_pagamento) = MONTH(CURDATE()) " +
+                     "AND YEAR(l.data_pagamento) = YEAR(CURDATE())";
+
+        double totalGastos = 0.0;
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, contaId);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                totalGastos = rs.getDouble("TotalGastos");
+            }
+
+            rs.close();
+        }
+
+        return totalGastos;
+    }
+
+
     private Lancamento resultSetToLancamento(ResultSet rs) throws SQLException {
         return new Lancamento(
             rs.getInt("id"),

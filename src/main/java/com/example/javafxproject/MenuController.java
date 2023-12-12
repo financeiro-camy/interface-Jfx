@@ -9,11 +9,13 @@ import com.example.Propriedades;
 import DAO.ContasDinheiro;
 import DAO.ContasDinheiroDAO;
 import DAO.HistoricoSaldosDAO;
+import DAO.LancamentoDAO;
 import DAO.ProjetoCofrinho;
 import DAO.ProjetoCofrinhoDAO;
 import DAO.UsuarioAtributoDAO;
 import DAO.UsuarioDAO;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -38,6 +40,9 @@ public class MenuController {
 
     @FXML
     private ProgressBar progressProject;
+
+    @FXML
+    private Label lblweeklywaste;
 
     private UsuarioAtributoDAO ua;
     private UsuarioDAO userDAO;
@@ -79,6 +84,8 @@ public class MenuController {
 
         carregarContas();
         carregarProjetos();
+        lblweeklywaste.setAlignment(Pos.CENTER);
+
     }
 
    
@@ -113,6 +120,7 @@ public class MenuController {
                 selectedAccountId = accountId;
             } try {
                 atualizarSaldoContaSelecionada();
+                weeklyWaste();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -124,9 +132,19 @@ public class MenuController {
         if (selectedAccountId != -1) {
             HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO(); 
             double saldo = historicoSaldosDAO.buscarValorAtivoPorIdConta(selectedAccountId);
-            lblsaldo.setText("R$ " + saldo); 
+            System.out.println(saldo);
+            lblsaldo.setText(String.format("R$ %.2f", saldo)); 
         }
     }
+
+    public void weeklyWaste() throws SQLException {
+        if (selectedAccountId != -1) {
+            LancamentoDAO lancamentoDAO = new LancamentoDAO();
+            double waste = lancamentoDAO.calcularGastosSemana(selectedAccountId);
+            lblweeklywaste.setText(String.format("R$ %.2f", waste));
+      }
+    }    
+
 
      public void carregarProjetos() throws SQLException{
        ProjetoCofrinhoDAO projetoDAO = new ProjetoCofrinhoDAO();

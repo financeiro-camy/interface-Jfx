@@ -25,6 +25,7 @@ public class Propriedades{
             stage.setScene(scene);
             stage.sizeToScene();
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
             stage.showAndWait();
   }
 

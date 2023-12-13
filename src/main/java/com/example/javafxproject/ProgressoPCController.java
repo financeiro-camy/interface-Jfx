@@ -94,7 +94,8 @@ public class ProgressoPCController {
 
                 lblprojeto.setText(projetoSelecionado.getNome());
                 lbldescricao.setText(projetoSelecionado.getDescricao());
-                lblmeta.setText(String.valueOf(projetoSelecionado.getMeta_quantia()));
+                lblmeta.setText(String.format("R$ %.2f", projetoSelecionado.getMeta_quantia()));  
+
 
                 LocalDate prazo = projetoSelecionado.getPrazo();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
@@ -105,13 +106,13 @@ public class ProgressoPCController {
                 double valorAtingido = outraInstanciaProjetosDAO.calcularValorAtingido(selectedProjectId);  
                 double valorRestante = outraInstanciaProjetosDAO.calcularQuantiaRestante(selectedProjectId); 
 
-                lblatingido.setText(String.valueOf(valorAtingido));
-                lblrestante.setText(String.valueOf(valorRestante));
+                lblatingido.setText(String.format("R$ %.2f", valorAtingido)); 
+                lblrestante.setText(String.format("R$ %.2f", valorRestante)); 
 
                 if (projetoSelecionado.isAtivo()==false){
                     lblAtivo.setText("Parabéns! Você já alcançou a sua meta!");
                 } else {
-                    lblAtivo.setText("Projeto está ativo! Você ainda está no caminho!");
+                    lblAtivo.setText("Projeto está ativo!");
                 }
 
                 double total = projetoSelecionado.getMeta_quantia(); 
@@ -120,7 +121,8 @@ public class ProgressoPCController {
 
                 double percentual = (valorAtingido*100)/total;
 
-                lblpercentual.setText(String.valueOf(percentual));
+                String percentualFormatado = String.format("%.2f%%", percentual);
+                lblpercentual.setText(percentualFormatado);
 
             }
         });
@@ -128,9 +130,14 @@ public class ProgressoPCController {
 
    
 
-    @FXML 
+    @FXML  
     public void adicionarQuantia() {
 
+    }
+
+    @FXML 
+    public void voltarMenu() throws IOException{
+        propriedades.ScreenGuider("tela-menu3.fxml","Tela Menu");
     }
 
 }

@@ -2,10 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.ProgressoPCController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.ProgressoPCController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #81a0a0;" VBox.vgrow="ALWAYS">
          <children>
@@ -27,10 +25,9 @@
                   <Font name="System Bold" size="32.0" />
                </font>
             </Label>
-            <ComboBox fx:id="projetoComboBox" layoutX="380.0" layoutY="91.0" prefHeight="14.0" prefWidth="187.0" promptText="Selecione o projeto" style="-fx-background-color: #d2e2ff;" />
-            <ScrollBar layoutX="631.0" layoutY="1.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="18.0" style="-fx-background-color: #f6f6f6;" />
-            <ProgressBar fx:id="progressPJ" layoutX="44.0" layoutY="332.0" prefWidth="200.0" progress="0.0" />
-            <ImageView fitHeight="31.0" fitWidth="34.0" layoutX="39.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <ComboBox fx:id="projetoComboBox" layoutX="351.0" layoutY="79.0" prefHeight="38.0" prefWidth="200.0" promptText="Selecione o projeto" style="-fx-background-color: #d2e2ff;" />
+            <ProgressBar fx:id="progressPJ" layoutX="44.0" layoutY="332.0" prefWidth="200.0" progress="0.0" style="-fx-accent: #ffafaf;" />
+            <ImageView fitHeight="31.0" fitWidth="34.0" layoutX="39.0" layoutY="24.0" onMouseClicked="#voltarMenu" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@usuariofoto (3).png" />
                </image>
@@ -41,43 +38,42 @@
                </font>
             </Label>
             <Line endX="100.0" layoutX="140.0" layoutY="173.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
-            <Label fx:id="projeto" layoutX="44.0" layoutY="190.0" text="Nome do projeto:" textFill="WHITE">
+            <Label layoutX="44.0" layoutY="190.0" text="Nome do projeto:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="percentual" layoutX="43.0" layoutY="311.0" text="Progresso:" textFill="WHITE">
+            <Label layoutX="43.0" layoutY="311.0" text="Progresso:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="descricao" layoutX="44.0" layoutY="229.0" text="Descrição:" textFill="WHITE">
+            <Label layoutX="44.0" layoutY="219.0" text="Descrição:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="meta" layoutX="44.0" layoutY="275.0" text="Valor da meta:" textFill="WHITE">
+            <Label layoutX="44.0" layoutY="275.0" text="Valor da meta:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="atingido" layoutX="381.0" layoutY="165.0" text="Valor atingido:" textFill="WHITE">
+            <Label layoutX="351.0" layoutY="163.0" text="Valor atingido:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="prazo" layoutX="381.0" layoutY="209.0" text="Data do objetivo cumprido:" textFill="WHITE">
+            <Label layoutX="349.0" layoutY="209.0" text="Prazo do projeto: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <DatePicker layoutX="381.0" layoutY="229.0" prefHeight="2.0" prefWidth="169.0" />
-            <Label fx:id="restante" layoutX="382.0" layoutY="275.0" text="Valor restante:" textFill="WHITE">
+            <Label layoutX="349.0" layoutY="247.0" text="Valor restante:" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="adicionarQuantia" layoutX="490.0" layoutY="341.0" mnemonicParsing="false" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Adicionar" textFill="WHITE">
+            <Button layoutX="524.0" layoutY="349.0" mnemonicParsing="false" onAction="#adicionarQuantia" style="-fx-background-color: #cf9e9d; -fx-background-radius: 15px;" text="Adicionar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -92,6 +88,43 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <Label fx:id="lblprojeto" layoutX="160.0" layoutY="191.0" prefHeight="18.0" prefWidth="140.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="lbldescricao" layoutX="43.0" layoutY="238.0" prefHeight="18.0" prefWidth="252.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblmeta" layoutX="139.0" layoutY="276.0" prefHeight="18.0" prefWidth="109.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblprazo" layoutX="464.0" layoutY="209.0" prefHeight="18.0" prefWidth="120.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblatingido" layoutX="451.0" layoutY="164.0" prefHeight="18.0" prefWidth="127.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblrestante" layoutX="442.0" layoutY="247.0" prefHeight="18.0" prefWidth="120.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblpercentual" layoutX="111.0" layoutY="311.0" prefHeight="18.0" prefWidth="55.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <Label layoutX="351.0" layoutY="284.0" text="Status: " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblAtivo" layoutX="351.0" layoutY="301.0" prefHeight="18.0" prefWidth="252.0" text="..." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
          </children>
     </AnchorPane>
   </children>

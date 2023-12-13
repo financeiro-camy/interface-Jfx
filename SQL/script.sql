@@ -109,5 +109,7 @@ INSERT INTO Categoria (id_usuario, nome) VALUES
 (1, 'Presentes'),
 (1, 'Carro'),
 (1, 'Bonus'),
-(1, 'Coleção Sylvanian Families');
+(1, 'Coleção Sylvanian Families')
+(1,'Projeto');
+
 

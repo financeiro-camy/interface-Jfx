@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import DAO.ProjetoCofrinho;
 import DAO.ProjetoCofrinhoDAO;
 import DAO.UsuarioAtributoDAO;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 
@@ -43,52 +42,64 @@ public class ProgressoPCController {
     @FXML
     private Label lblAtivo;
 
-    @FXML 
-    private ComboBox<String> projetoComboBox;
-
-    
     @FXML
     private ProgressBar progressPJ;
 
+    @FXML
+    private Button buttonAddValue;
 
     Propriedades propriedades = new Propriedades();
 
     @FXML
     public void initialize() throws SQLException {
+
         System.out.println("Inicializando o controlador ProgressoPCController...");
-        carregarProjetos();
+        if ( getProject() != -1) {
+            projectReport();
+            controlButtonVisibility();
+        } else{
+            propriedades.exibirAlerta("Nenhum projeto encontrado", "Erro ao encontrar projeto");
+        }
+     }
 
-    }
 
-    public void carregarProjetos() throws SQLException{
-       ProjetoCofrinhoDAO projetoDAO = new ProjetoCofrinhoDAO();
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+     public int getProject() throws SQLException{
 
-        List<ProjetoCofrinho> projetos = projetoDAO.findProjectsByUserId(user_id);
+        UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
+        int user_id = propriedades.getUserId();
+        String searchedProject = uaDAO.obterValorAtributo(user_id, "Projeto pesquisado");
+        int projectId = Integer.parseInt(searchedProject);
+        System.out.println("ID do projeto selecionado: " + projectId);
 
-        projetoComboBox.getItems().clear();
+        return projectId;
 
-        projetoComboBox.getItems().add("Adicionar");
+     }
 
-        for (ProjetoCofrinho projeto : projetos) {
-            projetoComboBox.getItems().add(projeto.getNome());
+     private boolean isMetaAtingida() throws SQLException {
+
+        ProjetoCofrinhoDAO pcDAO = new ProjetoCofrinhoDAO();
+        selectedProjectId = getProject();
+        ProjetoCofrinho cofrinho = pcDAO.findById(selectedProjectId);
+            
+           return cofrinho.isAtivo(); 
         }
 
-        projetoComboBox.setOnAction(event -> {
-            String selectedProject = projetoComboBox.getSelectionModel().getSelectedItem();
-            if (selectedProject.equals("Adicionar")) {
-                try {
-                    propriedades.ScreenGuider("tela-projetocofrinho3.fxml", "Adicionar Projeto Cofrinho");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                ProjetoCofrinhoDAO outraInstanciaProjetosDAO = new ProjetoCofrinhoDAO();
-                int projectId = outraInstanciaProjetosDAO.findIdByUserIdAndName(selectedProject,user_id);
-                System.out.println("ID do projeto selecionado: " + projectId);
+    private void controlButtonVisibility() throws SQLException {
+        boolean activeProject = isMetaAtingida();
 
-                selectedProjectId = projectId;
+        if (activeProject == false) {
+            buttonAddValue.setVisible(false);
+        } else {
+            buttonAddValue.setVisible(true);
+        }
+    }
+
+
+    public void projectReport() throws SQLException{
+
+        ProjetoCofrinhoDAO outraInstanciaProjetosDAO = new ProjetoCofrinhoDAO();
+
+                selectedProjectId = getProject();
 
                 ProjetoCofrinho projetoSelecionado = outraInstanciaProjetosDAO.findById(selectedProjectId);
 
@@ -124,19 +135,29 @@ public class ProgressoPCController {
                 String percentualFormatado = String.format("%.2f%%", percentual);
                 lblpercentual.setText(percentualFormatado);
 
-            }
-        });
     }
-
    
+    @FXML
+    public void updateProject() throws IOException{
 
+        propriedades.ScreenGuider("tela-expandirmeta.fxml", "Expandir a meta");
+    }
+    
     @FXML  
-    public void adicionarQuantia() {
+    public void adicionarQuantia() throws IOException {
+
+        propriedades.ScreenGuider("tela-relatorioPC1.fxml", "Tela para adicionar quantia");
 
     }
 
     @FXML 
-    public void voltarMenu() throws IOException{
+    public void voltarMenu() throws IOException, SQLException{
+
+        UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
+        int user_id = propriedades.getUserId();
+        int removerID = uaDAO.obterIdAtributo(user_id,"Projeto pesquisado");
+        uaDAO.removerAtributo(removerID);
+
         propriedades.ScreenGuider("tela-menu3.fxml","Tela Menu");
     }
 

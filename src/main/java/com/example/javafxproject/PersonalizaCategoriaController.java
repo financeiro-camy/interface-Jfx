@@ -7,7 +7,6 @@ import com.example.Propriedades;
 
 import DAO.Categoria;
 import DAO.CategoriaDAO;
-import DAO.UsuarioAtributoDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -21,8 +20,7 @@ Propriedades propriedades = new Propriedades();
 
         String nomeCategoria = categoriaPersonalizada.getText();
 
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int id_usuario = ua.findSessaoId();
+        int id_usuario = propriedades.getUserId();
         System.out.println(id_usuario);
 
         Categoria categoria = new Categoria(id_usuario,nomeCategoria);

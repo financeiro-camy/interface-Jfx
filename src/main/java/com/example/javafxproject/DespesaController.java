@@ -68,8 +68,7 @@ public class DespesaController {
     }
 
     public void carregarCategorias() throws SQLException {
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         List<Categoria> categorias = categoriaDAO.findAllbyId(user_id);
@@ -100,8 +99,7 @@ public class DespesaController {
     }
 
     public void carregarPeriodicidades() throws SQLException {
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         PeriodicidadeDAO periodicidadeDAO = new PeriodicidadeDAO();
         List<Periodicidade> periodicidades = periodicidadeDAO.findDespesasByUsuario(user_id);
@@ -134,8 +132,7 @@ public class DespesaController {
 
     public void carregarContas() throws SQLException {
         ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         List<ContasDinheiro> contas = contasDAO.findContasByUsuario(user_id);
 

@@ -4,24 +4,33 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class UsuarioAtributoDAO {
 
-    private static final int ID_SESSAO_FIXO = 1;
 
-    public void adicionarAtributo(int idUsuario, String nomeAtributo, int idlogado) throws SQLException {
-        String sql = "INSERT INTO UsuarioAtributo (id, id_usuario, nome_atributo, valor_atributo) VALUES (?, ?, ?, ?)";
+    public void adicionarAtributoAlternative(int idUsuario, String nomeAtributo, int idlogado) throws SQLException {
+        String sql = "INSERT INTO UsuarioAtributo (id_usuario, nome_atributo, valor_atributo) VALUES (?, ?, ?)";
         try (
             Connection connection = Conexao.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ) {
-            statement.setInt(1, ID_SESSAO_FIXO);
-            statement.setInt(2, idUsuario);
-            statement.setString(3, nomeAtributo);
-            statement.setInt(4, idlogado);
+            statement.setInt(1, idUsuario);
+            statement.setString(2, nomeAtributo);
+            statement.setInt(3, idlogado);
             statement.executeUpdate();
+    
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int chavePrimaria = generatedKeys.getInt(1);
+                System.out.println("Chave primária gerada automaticamente: " + chavePrimaria);
+            } else {
+                throw new SQLException("Falha ao obter a chave primária gerada.");
+            }
         }
     }
+    
 
     public void removerAtributo(int id) throws SQLException {
         String sql = "DELETE FROM UsuarioAtributo WHERE id = ?";
@@ -34,23 +43,60 @@ public class UsuarioAtributoDAO {
         }
     }
 
-    public int findSessaoId() throws SQLException {
-        String sql = "SELECT id_usuario FROM UsuarioAtributo WHERE id = ?";
+    public String obterValorAtributo(int idUsuario, String nomeAtributo) throws SQLException {
+        String valorAtributo = "-1";
+        String sql = "SELECT valor_atributo FROM UsuarioAtributo WHERE id_usuario = ? AND nome_atributo = ?";
+        
         try (
             Connection connection = Conexao.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
-            statement.setInt(1, ID_SESSAO_FIXO);
+            statement.setInt(1, idUsuario);
+            statement.setString(2, nomeAtributo);
+            ResultSet resultSet = statement.executeQuery();
             
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt("id_usuario");
+            if (resultSet.next()) {
+                valorAtributo = resultSet.getString("valor_atributo");
             }
-
-            rs.close();
         }
-        return -1; 
+        return valorAtributo;
+    }
+
+    public String obterValorAtributo(String nomeAtributo) throws SQLException {
+        String valorAtributo = null;
+        String sql = "SELECT valor_atributo FROM UsuarioAtributo WHERE nome_atributo = ?";
+        
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setString(1, nomeAtributo);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                valorAtributo = resultSet.getString("valor_atributo");
+            }
+        }
+        return valorAtributo;
+    }
+
+    public int obterIdAtributo(int idUsuario, String nomeAtributo) throws SQLException {
+        int id = -1;
+        String sql = "SELECT id FROM UsuarioAtributo WHERE id_usuario = ? AND nome_atributo = ?";
+        
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1, idUsuario);
+            statement.setString(2, nomeAtributo);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                id = resultSet.getInt("id");
+            }
+        }
+        return id;
     }
 
 }

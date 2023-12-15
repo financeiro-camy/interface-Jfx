@@ -55,7 +55,7 @@ public class MenuController {
         ua = new UsuarioAtributoDAO();
         userDAO = new UsuarioDAO();
         try {
-            idlogado = ua.findSessaoId();
+            idlogado = propriedades.getUserId();
             primeiraConta = userDAO.verificarContaDoUsuario(idlogado);
         } catch (SQLException e) {
             e.printStackTrace(); 
@@ -91,8 +91,7 @@ public class MenuController {
    
      public void carregarContas() throws SQLException {
         ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         List<ContasDinheiro> contas = contasDAO.findContasByUsuario(user_id);
 
@@ -148,8 +147,7 @@ public class MenuController {
 
      public void carregarProjetos() throws SQLException{
        ProjetoCofrinhoDAO projetoDAO = new ProjetoCofrinhoDAO();
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         List<ProjetoCofrinho> projetos = projetoDAO.findActiveProjects(user_id);
 
@@ -196,7 +194,7 @@ public class MenuController {
 
     @FXML
     public void adicionarProjeto() throws IOException{
-        propriedades.ScreenGuider("tela-projetocofrinho3.fxml","Adcionar um projeto cofrinho");
+        propriedades.ScreenGuider("tela-buscarrelatorio.fxml","Adcionar um projeto cofrinho");
     }
 
     @FXML
@@ -214,13 +212,4 @@ public class MenuController {
         propriedades.ScreenGuider("tela-contasdinheiro3.fxml","Cadastrar uma nova conta");
     }
 
-    @FXML
-    public void adicionarQuantia() throws IOException{
-        propriedades.ScreenGuider("tela-relatorioPC1.fxml","Tela Cadastrar Conta");
-    }
-
-    @FXML
-    public void acompanharProgresso() throws IOException{
-        propriedades.ScreenGuider("tela-progressoPC.fxml","Tela Progresso do Projeto Cofrinho");
-    }
 }

@@ -52,8 +52,7 @@ public class ContasDinheiroController {
 
         try {
             
-            UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-            int idlogado = ua.findSessaoId();
+            int idlogado = propriedades.getUserId();
             System.out.println(idlogado);    
 
             ContasDinheiro conta = new ContasDinheiro(idlogado, nome, valorSaldoInicial, dataSelecionada);

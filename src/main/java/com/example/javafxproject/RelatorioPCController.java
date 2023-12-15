@@ -40,21 +40,23 @@ public class RelatorioPCController {
   private ComboBox<String> contaComboBox;
 
   @FXML
-  private ComboBox<String> projetoComboBox;
+  private Label lblProjectInsert;
 
   Propriedades propriedades = new Propriedades();
   
   @FXML
     public void initialize() throws SQLException {
         carregarContas();
-        carregarProjetos();
+
+        if ( getProject() != -1) {
+            loadProjectName();
+        }
     }
 
 
   public void carregarContas() throws SQLException {
         ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         List<ContasDinheiro> contas = contasDAO.findContasByUsuario(user_id);
 
@@ -84,51 +86,39 @@ public class RelatorioPCController {
         });
     }
 
-    public void carregarProjetos() throws SQLException{
-       ProjetoCofrinhoDAO projetoDAO = new ProjetoCofrinhoDAO();
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
 
-        List<ProjetoCofrinho> projetos = projetoDAO.findActiveProjects(user_id);
+  public void loadProjectName() throws SQLException{
 
-        projetoComboBox.getItems().clear();
+    selectedProjectId = getProject();   
 
-        projetoComboBox.getItems().add("Adicionar");
+    ProjetoCofrinhoDAO pcDAO = new ProjetoCofrinhoDAO();
+    ProjetoCofrinho projetoSelecionado = pcDAO.findById(selectedProjectId);
+    lblProjectInsert.setText(projetoSelecionado.getNome());
 
-        for (ProjetoCofrinho projeto : projetos) {
-            projetoComboBox.getItems().add(projeto.getNome());
-        }
+  }
 
-        projetoComboBox.setOnAction(event -> {
-            String selectedProject = projetoComboBox.getSelectionModel().getSelectedItem();
-            if (selectedProject.equals("Adicionar")) {
-                try {
-                    propriedades.ScreenGuider("tela-projetocofrinho3.fxml", "Adicionar Projeto Cofrinho");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                ProjetoCofrinhoDAO outraInstanciaProjetosDAO = new ProjetoCofrinhoDAO();
-                int projectId = outraInstanciaProjetosDAO.findIdByUserIdAndName(selectedProject,user_id);
-                System.out.println("ID do projeto selecionado: " + projectId);
+   public int getProject() throws SQLException{
 
-                selectedProjectId = projectId;
-            }
-        });
-    }
+    UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
+    int user_id = propriedades.getUserId();
+    String valor = uaDAO.obterValorAtributo(user_id, "Projeto pesquisado");
+    selectedProjectId = Integer.parseInt(valor);
+    return selectedProjectId;
+
+   }
 
 
   @FXML
-  public void InserirValor() throws SQLException {
-     UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+  public void InserirValor() throws SQLException, IOException {
 
- if (selectedAccountId != -1 && selectedProjectId != -1) { 
-	  
+    int user_id = propriedades.getUserId();
+    selectedProjectId = getProject();
+
+if (selectedAccountId != -1 && selectedProjectId != -1) { 
+
     double valorInsercao = Double.parseDouble(txfQuantia.getText());
     LocalDate dataTransacao = dataInsercao.getValue();
   
-        
     System.out.println("Valor a ser inserido: " + valorInsercao);
     System.out.println("Data de inserção: " + dataInsercao);
     System.out.println("Conta: " + selectedAccountId);
@@ -162,6 +152,9 @@ public class RelatorioPCController {
 
         propriedades.exibirAlerta("Inserção realizada com sucesso!", "Sua inserção foi realizada com sucesso.");
         //limparCampos();
+
+        propriedades.ScreenGuider("tela-progressoPC.fxml","Tela de informações do projeto");
+        
     } else {
         propriedades.exibirAlerta("Saldo insuficiente", "Esta conta não possui saldo suficiente para realizar esta inserção. Por favor, tente novamente com outra conta.");
         limparCampos();
@@ -173,14 +166,13 @@ public class RelatorioPCController {
 
   @FXML
   public void voltarMenu() throws IOException{
-    propriedades.ScreenGuider("tela-menu3.fxml","Menu");
+    propriedades.ScreenGuider("tela-progressoPC.fxml","Tela de informações do projeto");
   }
 
   public void limparCampos() {
     txfQuantia.clear();
     dataInsercao.setValue(null);
     contaComboBox.getSelectionModel().clearSelection();
-    projetoComboBox.getSelectionModel().clearSelection();
 }
 }
 

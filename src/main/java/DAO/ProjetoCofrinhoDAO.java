@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -349,9 +350,30 @@ public class ProjetoCofrinhoDAO {
         }
     }
 
-    
-    
-    
+    public void expandirMeta(int projectId, double newGoal, LocalDate newDateline) {
+        String sql = "UPDATE ProjetoCofrinho SET meta_quantia = ?, prazo = ? WHERE id = ?;";
+
+        try (
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setDouble(1, newGoal);
+            statement.setDate(2, Date.valueOf(newDateline));
+            statement.setInt(3, projectId);
+            statement.executeUpdate();
+            System.out.println("Meta expandida com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Erro ao expandir a meta do projeto: " + e.getMessage());
+        }
+    }
+
+    public void expandirMetaEAtualizarAtivo(int projetoId, double novaMeta, LocalDate novoPrazo) {
+        expandirMeta(projetoId, novaMeta, novoPrazo); 
+        atualizarAtivoParaTrue(projetoId); 
+    }
+
+
     private ProjetoCofrinho resultSetToProjetoCofrinho(ResultSet rs) throws SQLException {
         return new ProjetoCofrinho(
             rs.getInt("id"),

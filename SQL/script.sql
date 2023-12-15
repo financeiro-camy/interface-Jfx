@@ -13,12 +13,12 @@ CREATE TABLE Usuario (
 
 
 CREATE TABLE UsuarioAtributo (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT,
     id_usuario INT,
     nome_atributo VARCHAR(255),
     valor_atributo VARCHAR(255),
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id),
-    UNIQUE KEY unique_usuario_atributo (id_usuario, nome_atributo)
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );
 
 CREATE TABLE Categoria (

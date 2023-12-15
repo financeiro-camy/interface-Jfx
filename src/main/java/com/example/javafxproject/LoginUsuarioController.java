@@ -32,7 +32,7 @@ public class LoginUsuarioController {
             if (idlogado != -1) {
 
                 UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
-                uaDAO.adicionarAtributo(idlogado, "id_usuario",idlogado);
+                uaDAO.adicionarAtributoAlternative(idlogado, "Usuario logado", idlogado);
                 
                 exibirAlerta("Login Bem Sucedido", "Login foi relizado com sucesso!");
                 AbrirMenu();

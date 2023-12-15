@@ -15,7 +15,6 @@ import DAO.Lancamento;
 import DAO.LancamentoDAO;
 import DAO.Periodicidade;
 import DAO.PeriodicidadeDAO;
-import DAO.UsuarioAtributoDAO;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -66,8 +65,7 @@ import javafx.scene.control.TextField;
     }
 
     public void carregarCategorias() throws SQLException {
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         List<Categoria> categorias = categoriaDAO.findAllbyId(user_id);
@@ -98,8 +96,7 @@ import javafx.scene.control.TextField;
     }
 
     public void carregarPeriodicidades() throws SQLException {
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         PeriodicidadeDAO periodicidadeDAO = new PeriodicidadeDAO();
         List<Periodicidade> periodicidades = periodicidadeDAO.findDespesasByUsuario(user_id);
@@ -132,8 +129,7 @@ import javafx.scene.control.TextField;
 
     public void carregarContas() throws SQLException {
         ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        int user_id = ua.findSessaoId();
+        int user_id = propriedades.getUserId();
 
         List<ContasDinheiro> contas = contasDAO.findContasByUsuario(user_id);
 

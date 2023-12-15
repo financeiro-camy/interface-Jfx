@@ -73,8 +73,8 @@ public class ProjetoCofrinhoController {
             if (valorMeta < 1) {
                 propriedades.exibirAlerta("Valor inválido", "A meta deve ser maior que zero.");
             } else {
-                UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-                int idlogado = ua.findSessaoId();
+
+                int idlogado = propriedades.getUserId();
 
                 ProjetoCofrinhoDAO projetoCofrinhoDAO = new ProjetoCofrinhoDAO();
 

@@ -9,6 +9,7 @@ import DAO.Categoria;
 import DAO.CategoriaDAO;
 import DAO.Periodicidade;
 import DAO.PeriodicidadeDAO;
+import DAO.UsuarioAtributoDAO;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -69,9 +70,16 @@ public class Propriedades{
         periodicidadeDAO.create(periodicidade4);
         periodicidadeDAO.create(periodicidade5);
         periodicidadeDAO.create(periodicidade6);
+    }
 
+    public int getUserId() throws SQLException{
 
+      UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
+      String valor = uaDAO.obterValorAtributo("Usuario logado");
+      int user_id = Integer.parseInt(valor);
 
+      return user_id;
+  
     }
 
 }

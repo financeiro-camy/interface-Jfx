@@ -11,14 +11,15 @@ import DAO.UsuarioAtributoDAO;
 
 public class FinalizacaoController {
   
+    Propriedades propriedades = new Propriedades();
 
     @FXML
    public void Logout() throws IOException, SQLException {
     
-        UsuarioAtributoDAO ua = new UsuarioAtributoDAO();
-        ua.removerAtributo(1);
+        UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
+        int user_id = propriedades.getUserId();
+        uaDAO.removerAtributo(user_id);
 
-        Propriedades propriedades = new Propriedades();
         propriedades.ScreenGuider("tela-login3.fxml","Tela Login");
         
     }

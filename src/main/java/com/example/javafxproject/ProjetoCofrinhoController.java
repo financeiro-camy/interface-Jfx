@@ -95,6 +95,6 @@ public class ProjetoCofrinhoController {
     }
     
     public void MenuPC() throws IOException{
-        propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
+        propriedades.ScreenGuider("tela-buscarrelatorio.fxml", "Buscar relatório");
     }
 }

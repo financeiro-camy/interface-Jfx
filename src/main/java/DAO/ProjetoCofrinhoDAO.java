@@ -47,7 +47,6 @@ public class ProjetoCofrinhoDAO {
         }
     }
     
-
     public ProjetoCofrinho update(ProjetoCofrinho projetoCofrinho) throws SQLException {
         String sql = """
             UPDATE ProjetoCofrinho 
@@ -144,7 +143,6 @@ public class ProjetoCofrinhoDAO {
         return null;
     }
 
- 
     public int findIdByUserIdAndName(String nomeProjeto, int idUsuario) {
         String sql = "SELECT id FROM ProjetoCofrinho WHERE nome = ? AND id_usuario = ?;";
         int id = -1; 
@@ -167,12 +165,10 @@ public class ProjetoCofrinhoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    
+
         return id;
     }
     
-    
-
     public List<ProjetoCofrinho> findAll() {
         String sql = "SELECT * FROM ProjetoCofrinho;";
         List<ProjetoCofrinho> projetos = new ArrayList<>();
@@ -247,8 +243,6 @@ public class ProjetoCofrinhoDAO {
             return null;
         }
     }
-
-
 
     public double calcularQuantiaRestante(int idProjetoCofrinho) {
         String sql = "SELECT pc.meta_quantia - COALESCE(SUM(rpc.valor), 0) AS diferenca " +
@@ -372,7 +366,6 @@ public class ProjetoCofrinhoDAO {
         expandirMeta(projetoId, novaMeta, novoPrazo); 
         atualizarAtivoParaTrue(projetoId); 
     }
-
 
     private ProjetoCofrinho resultSetToProjetoCofrinho(ResultSet rs) throws SQLException {
         return new ProjetoCofrinho(

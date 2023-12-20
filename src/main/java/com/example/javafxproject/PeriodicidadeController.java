@@ -28,8 +28,6 @@ public class PeriodicidadeController {
         Periodicidade periodicidade = new Periodicidade(idlogado,nomePeriodo);
         PeriodicidadeDAO periodicidadeDAO = new PeriodicidadeDAO();
 
-        periodicidadeDAO.create(periodicidade);
-        
-
+        periodicidadeDAO.create(periodicidade);    
     }
 }

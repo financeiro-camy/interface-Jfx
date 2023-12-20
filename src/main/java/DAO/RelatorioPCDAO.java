@@ -52,8 +52,7 @@ public class RelatorioPCDAO {
             return relatorioPC;
         }
     }
-    
-        
+           
         public RelatorioPC update(RelatorioPC relatorioPC) throws SQLException {
             String sql = "UPDATE RelatorioPC SET id_cofrinho=?, id_conta=?, valor=?, data_insercao=? WHERE id=?;";
     
@@ -174,14 +173,13 @@ public class RelatorioPCDAO {
         }
     }
 
-private RelatorioPC resultSetToRelatorioPC(ResultSet rs) throws SQLException {
-            return new RelatorioPC(
-                rs.getInt("id"),
-                rs.getInt("id_cofrinho"),
-                rs.getInt("id_conta"),
-                rs.getDouble("valor"),
-                rs.getDate("data_insercao").toLocalDate()
-            );
-        }
+    private RelatorioPC resultSetToRelatorioPC(ResultSet rs) throws SQLException {
+        return new RelatorioPC(
+            rs.getInt("id"),
+            rs.getInt("id_cofrinho"),
+            rs.getInt("id_conta"),
+            rs.getDouble("valor"),
+            rs.getDate("data_insercao").toLocalDate()
+        );
     }
-
+}

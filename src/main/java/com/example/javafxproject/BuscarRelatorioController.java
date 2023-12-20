@@ -40,7 +40,6 @@ public class BuscarRelatorioController {
     public void voltarMenu() throws IOException, SQLException{
 
         propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
-
     }
 
     @FXML

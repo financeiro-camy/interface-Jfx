@@ -62,7 +62,6 @@ public class ProgressoPCController {
         }
      }
 
-
      public int getProject() throws SQLException{
 
         UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
@@ -72,7 +71,6 @@ public class ProgressoPCController {
         System.out.println("ID do projeto selecionado: " + projectId);
 
         return projectId;
-
      }
 
      private boolean isMetaAtingida() throws SQLException {
@@ -94,47 +92,43 @@ public class ProgressoPCController {
         }
     }
 
-
     public void projectReport() throws SQLException{
-
         ProjetoCofrinhoDAO outraInstanciaProjetosDAO = new ProjetoCofrinhoDAO();
+            
+        selectedProjectId = getProject();
 
-                selectedProjectId = getProject();
+        ProjetoCofrinho projetoSelecionado = outraInstanciaProjetosDAO.findById(selectedProjectId);
 
-                ProjetoCofrinho projetoSelecionado = outraInstanciaProjetosDAO.findById(selectedProjectId);
+        lblprojeto.setText(projetoSelecionado.getNome());
+        lbldescricao.setText(projetoSelecionado.getDescricao());
+        lblmeta.setText(String.format("R$ %.2f", projetoSelecionado.getMeta_quantia()));  
 
-                lblprojeto.setText(projetoSelecionado.getNome());
-                lbldescricao.setText(projetoSelecionado.getDescricao());
-                lblmeta.setText(String.format("R$ %.2f", projetoSelecionado.getMeta_quantia()));  
+        LocalDate prazo = projetoSelecionado.getPrazo();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+        String prazoFormatado = prazo.format(formatter);
 
+        lblprazo.setText(prazoFormatado);
 
-                LocalDate prazo = projetoSelecionado.getPrazo();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
-                String prazoFormatado = prazo.format(formatter);
+        double valorAtingido = outraInstanciaProjetosDAO.calcularValorAtingido(selectedProjectId);  
+        double valorRestante = outraInstanciaProjetosDAO.calcularQuantiaRestante(selectedProjectId); 
 
-                lblprazo.setText(prazoFormatado);
+        lblatingido.setText(String.format("R$ %.2f", valorAtingido)); 
+        lblrestante.setText(String.format("R$ %.2f", valorRestante)); 
 
-                double valorAtingido = outraInstanciaProjetosDAO.calcularValorAtingido(selectedProjectId);  
-                double valorRestante = outraInstanciaProjetosDAO.calcularQuantiaRestante(selectedProjectId); 
+        if (projetoSelecionado.isAtivo()==false){
+            lblAtivo.setText("Parabéns! Você já alcançou a sua meta!");
+        } else {
+            lblAtivo.setText("Projeto está ativo!");
+        }
 
-                lblatingido.setText(String.format("R$ %.2f", valorAtingido)); 
-                lblrestante.setText(String.format("R$ %.2f", valorRestante)); 
+        double total = projetoSelecionado.getMeta_quantia(); 
+        double valorAtingidoNormalizado = valorAtingido / total;
+        progressPJ.setProgress(valorAtingidoNormalizado);
 
-                if (projetoSelecionado.isAtivo()==false){
-                    lblAtivo.setText("Parabéns! Você já alcançou a sua meta!");
-                } else {
-                    lblAtivo.setText("Projeto está ativo!");
-                }
+        double percentual = (valorAtingido*100)/total;
 
-                double total = projetoSelecionado.getMeta_quantia(); 
-                double valorAtingidoNormalizado = valorAtingido / total;
-                progressPJ.setProgress(valorAtingidoNormalizado);
-
-                double percentual = (valorAtingido*100)/total;
-
-                String percentualFormatado = String.format("%.2f%%", percentual);
-                lblpercentual.setText(percentualFormatado);
-
+        String percentualFormatado = String.format("%.2f%%", percentual);
+        lblpercentual.setText(percentualFormatado);
     }
    
     @FXML
@@ -160,5 +154,4 @@ public class ProgressoPCController {
 
         propriedades.ScreenGuider("tela-menu3.fxml","Tela Menu");
     }
-
 }

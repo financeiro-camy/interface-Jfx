@@ -70,5 +70,3 @@ public class RelatorioPC {
         return "RelatorioPC [id =" + id + ", id_cofrinho =" + id_cofrinho + ", id_conta = " + id_conta + ", valor =" + valor + ", data_insercao =" + data_insercao + "]";
     }
 }
-
-

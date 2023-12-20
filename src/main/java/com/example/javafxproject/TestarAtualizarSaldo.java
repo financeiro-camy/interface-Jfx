@@ -1,7 +1,6 @@
 package com.example.javafxproject;
 
 import java.sql.SQLException;
-
 import DAO.HistoricoSaldosDAO;
 
 public class TestarAtualizarSaldo {
@@ -19,5 +18,3 @@ public class TestarAtualizarSaldo {
         }
     }
 }
-
-

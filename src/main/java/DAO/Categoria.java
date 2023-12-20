@@ -44,5 +44,4 @@ public void setNome(String nome){
     public String toString() {
         return "Categoria [id=" + id + ", id_usuario=" + id_usuario + ", nome=" + nome + "]";
     }
-
 }

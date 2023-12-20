@@ -159,54 +159,51 @@ import javafx.scene.control.TextField;
         });
     }
         
-    
-        @FXML
-        public void AdicionarReceita() throws SQLException {
-        if (selectedCategoryId != -1 && selectedPeriodicityId != -1 && selectedAccountId != -1) {
-            
-            String revenueName = nomeReceita.getText();
-            String revenueDescription = descricaoReceita.getText();
-            LocalDate revenueDate = dataRecebido.getValue();
-            double revenueValue = Double.parseDouble(valorReceita.getText());
-            Boolean isPaid = receitaCKB.isSelected();
-            int revenueParcelas = Integer.parseInt(nParcelas.getText());
+    @FXML
+    public void AdicionarReceita() throws SQLException {
+    if (selectedCategoryId != -1 && selectedPeriodicityId != -1 && selectedAccountId != -1) {  
+        String revenueName = nomeReceita.getText();
+        String revenueDescription = descricaoReceita.getText();
+        LocalDate revenueDate = dataRecebido.getValue();
+        double revenueValue = Double.parseDouble(valorReceita.getText());
+        Boolean isPaid = receitaCKB.isSelected();
+        int revenueParcelas = Integer.parseInt(nParcelas.getText());
 
-            Lancamento lancamento = new Lancamento(selectedCategoryId,selectedAccountId,selectedPeriodicityId,revenueName,revenueDescription,revenueValue,"receita",revenueParcelas,revenueDate,isPaid,revenueDate);
-            LancamentoDAO lancamentoDAO = new LancamentoDAO();
-            lancamentoDAO.create(lancamento);
+        Lancamento lancamento = new Lancamento(selectedCategoryId,selectedAccountId,selectedPeriodicityId,revenueName,revenueDescription,revenueValue,"receita",revenueParcelas,revenueDate,isPaid,revenueDate);
+        LancamentoDAO lancamentoDAO = new LancamentoDAO();
+        lancamentoDAO.create(lancamento);
 
-            if (lancamento.isPago()==true){
-            HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
-            historicoSaldosDAO.atualizarSaldo(revenueValue, "receita", selectedAccountId);
-            }
+        if (lancamento.isPago()==true){
+        HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO();
+        historicoSaldosDAO.atualizarSaldo(revenueValue, "receita", selectedAccountId);
+        }
 
-            propriedades.exibirAlerta("Receita cadastrada com sucesso! ", "Sua receita foi cadastrada com sucesso!");
+        propriedades.exibirAlerta("Receita cadastrada com sucesso! ", "Sua receita foi cadastrada com sucesso!");
 
-            limparCampos();
+        limparCampos();
 
         } else {
             System.out.println("Deu erro, amigão");
         }
-        }
-    
-        @FXML
-        public void voltarMenu() throws IOException{
-        propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
-        }
-
-        public void limparCampos() {
-            nomeReceita.clear();
-            valorReceita.clear();
-            dataRecebido.getEditor().clear();
-            receitaCKB.setSelected(false);
-            descricaoReceita.clear();
-            nParcelas.clear();
-            categoriaComboBox.getSelectionModel().clearSelection();
-            contaComboBox.getSelectionModel().clearSelection();
-            periodicidadeComboBox.getSelectionModel().clearSelection();
-        }
-        
     }
+    
+    @FXML
+    public void voltarMenu() throws IOException{
+    propriedades.ScreenGuider("tela-menu3.fxml", "Menu");
+    }
+
+    public void limparCampos() {
+        nomeReceita.clear();
+        valorReceita.clear();
+        dataRecebido.getEditor().clear();
+        receitaCKB.setSelected(false);
+        descricaoReceita.clear();
+        nParcelas.clear();
+        categoriaComboBox.getSelectionModel().clearSelection();
+        contaComboBox.getSelectionModel().clearSelection();
+        periodicidadeComboBox.getSelectionModel().clearSelection();
+    }     
+}
     
     
 

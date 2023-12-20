@@ -15,7 +15,6 @@ import DAO.ProjetoCofrinhoDAO;
 import DAO.UsuarioAtributoDAO;
 
 public class ProjetoCofrinhoController {
-
     @FXML
     private TextField nomeTextField;
 

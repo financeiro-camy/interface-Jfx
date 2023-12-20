@@ -41,7 +41,6 @@ public class CategoriaDAO {
         }
     }
     
-
     public Categoria update(Categoria categoria) throws SQLException {
         String sql = """
             UPDATE Categoria 
@@ -189,4 +188,3 @@ public class CategoriaDAO {
         );
     }
 }
-

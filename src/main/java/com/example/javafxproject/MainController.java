@@ -12,29 +12,28 @@ import javafx.stage.Stage;
 
 public class MainController {
 
-@FXML
-protected void onAbrirProjetoCofrinho() throws IOException {
-FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-login3.fxml"));
-Scene scene = new Scene(loader.load());
-Stage stage = new Stage();
-stage.setTitle("Projeto Cofrinho");
-stage.setScene(scene);
-stage.sizeToScene();
-stage.initModality(Modality.APPLICATION_MODAL);
-stage.showAndWait();
-}
+    @FXML
+    protected void onAbrirProjetoCofrinho() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-login3.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Projeto Cofrinho");
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
 
-@FXML
-protected void onContaDinheiro() throws IOException {
-FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-contasdinheiro3.fxml"));
-Scene scene = new Scene(loader.load());
-Stage stage = new Stage();
-stage.setTitle("Contas Dinheiro");
-stage.setScene(scene);
-stage.sizeToScene();
-stage.initModality(Modality.APPLICATION_MODAL);
-stage.showAndWait();
-}
-
+    @FXML
+    protected void onContaDinheiro() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("tela-contasdinheiro3.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Contas Dinheiro");
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
 }
 

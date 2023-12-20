@@ -17,7 +17,6 @@ import com.example.Propriedades;
 
 
 public class ContasDinheiroController {
-
     @FXML
     private TextField txfContaNome;
 

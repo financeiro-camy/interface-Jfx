@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 
-
 import java.sql.Date;
 
 public class HistoricoSaldosDAO {
@@ -234,7 +233,5 @@ public double insertedValueProject(double valor, int projeto, int id_conta){
             rs.getBoolean("ativo")
         );
     }
-    
-   
 }
 

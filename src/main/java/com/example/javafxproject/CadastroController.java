@@ -16,9 +16,6 @@ import java.util.regex.Pattern;
 
 
 public class CadastroController {
-    
-
-
     @FXML
     private TextField txfNome;
     
@@ -32,8 +29,6 @@ public class CadastroController {
     private PasswordField txfSenhaTeste;
        
     Propriedades propriedades = new Propriedades();
-
-   
 
     public void Cadastrar() throws IOException, SQLException {
         String nome = txfNome.getText();
@@ -61,14 +56,11 @@ public class CadastroController {
             }
         }
     
-    
-
     public void CriarPrimeiraConta() throws IOException {
         propriedades.ScreenGuider("tela-login3.fxml", "Fazer login");
     }
 
-    public void onActionLogin() throws IOException {
-        
+    public void onActionLogin() throws IOException { 
         propriedades.ScreenGuider("tela-login3.fxml","Login");
     }
 
@@ -80,5 +72,4 @@ public class CadastroController {
 
         return matcher.matches();
     }
-    
 }

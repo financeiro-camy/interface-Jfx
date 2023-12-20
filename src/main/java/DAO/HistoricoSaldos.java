@@ -10,7 +10,6 @@ public class HistoricoSaldos {
     private double saldo;
     private boolean ativo;
 
-   
     public HistoricoSaldos(int id, int idConta, LocalDate dataRegistro, double saldo, boolean ativo) {
         this.id = id;
         this.idConta = idConta;
@@ -66,5 +65,3 @@ public class HistoricoSaldos {
         this.ativo = ativo;
     }
 }
-
-

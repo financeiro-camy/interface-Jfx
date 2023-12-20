@@ -1,6 +1,5 @@
 package DAO;
 
-
 import java.time.LocalDate;
 
 public class ContasDinheiro {
@@ -66,5 +65,3 @@ public class ContasDinheiro {
         return "ContasDinheiro [nome=" + nome + ", saldoInicial=" + saldoInicial + ", dataSaldoInicial=" + dataSaldoInicial + "]";
     }
 }
-
-

@@ -11,7 +11,6 @@ import java.util.List;
 
 public class LancamentoDAO {
     
-
     public Lancamento create(Lancamento lancamento) throws SQLException {
         String sql = "INSERT INTO Lancamento (id_categoria, id_conta, id_periodicidade, nome, descricao, valor, tipo, numero_parcelas, data_vencimento, pago, data_pagamento) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -191,7 +190,6 @@ public class LancamentoDAO {
 
         return totalGastos;
     }
-
 
     private Lancamento resultSetToLancamento(ResultSet rs) throws SQLException {
         return new Lancamento(

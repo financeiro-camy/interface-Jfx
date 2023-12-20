@@ -14,7 +14,7 @@ public class FinalizacaoController {
     Propriedades propriedades = new Propriedades();
 
     @FXML
-   public void Logout() throws IOException, SQLException {
+    public void Logout() throws IOException, SQLException {
     
         UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
         int user_id = propriedades.getUserId();

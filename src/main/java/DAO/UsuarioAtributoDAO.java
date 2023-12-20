@@ -9,7 +9,6 @@ import java.sql.Statement;
 
 public class UsuarioAtributoDAO {
 
-
     public void adicionarAtributoAlternative(int idUsuario, String nomeAtributo, int idlogado) throws SQLException {
         String sql = "INSERT INTO UsuarioAtributo (id_usuario, nome_atributo, valor_atributo) VALUES (?, ?, ?)";
         try (
@@ -30,7 +29,6 @@ public class UsuarioAtributoDAO {
             }
         }
     }
-    
 
     public void removerAtributo(int id) throws SQLException {
         String sql = "DELETE FROM UsuarioAtributo WHERE id = ?";
@@ -98,7 +96,4 @@ public class UsuarioAtributoDAO {
         }
         return id;
     }
-
 }
-
-

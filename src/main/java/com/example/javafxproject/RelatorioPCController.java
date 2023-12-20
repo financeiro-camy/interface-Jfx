@@ -29,41 +29,41 @@ public class RelatorioPCController {
   private int selectedAccountId = -1;
   private int selectedProjectId = -1;
 
-  @FXML
-  private TextField txfQuantia;
+    @FXML
+    private TextField txfQuantia;
 
-  @FXML
-  private DatePicker dataInsercao;
+    @FXML
+    private DatePicker dataInsercao;
 
-  @FXML
-  private ComboBox<String> contaComboBox;
+    @FXML
+    private ComboBox<String> contaComboBox;
 
-  @FXML
-  private Label lblProjectInsert;
+    @FXML
+    private Label lblProjectInsert;
 
-  Propriedades propriedades = new Propriedades();
-  
-  @FXML
-    public void initialize() throws SQLException {
-        carregarContas();
+    Propriedades propriedades = new Propriedades();
+    
+    @FXML
+        public void initialize() throws SQLException {
+            carregarContas();
 
-        if ( getProject() != -1) {
-            loadProjectName();
+            if ( getProject() != -1) {
+                loadProjectName();
+            }
         }
-    }
 
-  public void carregarContas() throws SQLException {
-        ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
-        int user_id = propriedades.getUserId();
+    public void carregarContas() throws SQLException {
+            ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
+            int user_id = propriedades.getUserId();
 
-        List<ContasDinheiro> contas = contasDAO.findContasByUsuario(user_id);
+            List<ContasDinheiro> contas = contasDAO.findContasByUsuario(user_id);
 
-        contaComboBox.getItems().clear();
+            contaComboBox.getItems().clear();
 
-        contaComboBox.getItems().add("Adicionar");
+            contaComboBox.getItems().add("Adicionar");
 
-        for (ContasDinheiro conta : contas) {
-            contaComboBox.getItems().add(conta.getNome());
+            for (ContasDinheiro conta : contas) {
+                contaComboBox.getItems().add(conta.getNome());
         }
 
         contaComboBox.setOnAction(event -> {
@@ -91,11 +91,9 @@ public class RelatorioPCController {
     ProjetoCofrinhoDAO pcDAO = new ProjetoCofrinhoDAO();
     ProjetoCofrinho projetoSelecionado = pcDAO.findById(selectedProjectId);
     lblProjectInsert.setText(projetoSelecionado.getNome());
-
   }
 
-   public int getProject() throws SQLException{
-
+    public int getProject() throws SQLException{
     UsuarioAtributoDAO uaDAO = new UsuarioAtributoDAO();
     int user_id = propriedades.getUserId();
     String valor = uaDAO.obterValorAtributo(user_id, "Projeto pesquisado");
@@ -104,13 +102,13 @@ public class RelatorioPCController {
 
    }
 
-  @FXML
-  public void InserirValor() throws SQLException, IOException {
+    @FXML
+    public void InserirValor() throws SQLException, IOException {
 
     int user_id = propriedades.getUserId();
     selectedProjectId = getProject();
 
-if (selectedAccountId != -1 && selectedProjectId != -1) { 
+    if (selectedAccountId != -1 && selectedProjectId != -1) { 
 
     double valorInsercao = Double.parseDouble(txfQuantia.getText());
     LocalDate dataTransacao = dataInsercao.getValue();
@@ -155,20 +153,19 @@ if (selectedAccountId != -1 && selectedProjectId != -1) {
         propriedades.exibirAlerta("Saldo insuficiente", "Esta conta não possui saldo suficiente para realizar esta inserção. Por favor, tente novamente com outra conta.");
         limparCampos();
     }
-} else {
-    System.out.println("Deu erro, amigão"); //trocar esse amigão porque soa informal demais, carlos!! hahahahaha
-}          
+    } else {
+        System.out.println("Deu erro, amigão"); //trocar esse amigão porque soa informal demais, carlos!! hahahahaha
+    }          
   }
 
-  @FXML
-  public void voltarMenu() throws IOException{
-    propriedades.ScreenGuider("tela-progressoPC.fxml","Tela de informações do projeto");
+    @FXML
+    public void voltarMenu() throws IOException{
+        propriedades.ScreenGuider("tela-progressoPC.fxml","Tela de informações do projeto");
   }
 
-  public void limparCampos() {
-    txfQuantia.clear();
-    dataInsercao.setValue(null);
-    contaComboBox.getSelectionModel().clearSelection();
+    public void limparCampos() {
+        txfQuantia.clear();
+        dataInsercao.setValue(null);
+        contaComboBox.getSelectionModel().clearSelection();
+    }
 }
-}
-

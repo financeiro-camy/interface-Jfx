@@ -155,7 +155,6 @@ public class ContasDinheiroDAO {
             return null;
         }
     }
-    
 
     public ContasDinheiro findById(Integer id) {
         String sql = "SELECT * FROM ContasDinheiro WHERE id = ?;";
@@ -182,7 +181,6 @@ public class ContasDinheiroDAO {
         return null;
     }
 
-
     private ContasDinheiro resultSetToContasDinheiro(ResultSet rs) throws SQLException {
         return new ContasDinheiro(
             rs.getInt("id"),
@@ -193,5 +191,3 @@ public class ContasDinheiroDAO {
         );
     }
 }
-
-

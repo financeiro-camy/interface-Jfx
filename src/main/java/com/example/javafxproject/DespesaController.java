@@ -215,6 +215,4 @@ public class DespesaController {
         periodicidadeComboBox.getSelectionModel().clearSelection();
         contaComboBox.getSelectionModel().clearSelection();
     }
-    
-
 }

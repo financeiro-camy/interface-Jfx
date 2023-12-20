@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ExpandirMetaController {
-    
     @FXML
     private TextField txfNewGoal;
 
@@ -41,14 +40,12 @@ public class ExpandirMetaController {
     } else{
         propriedades.exibirAlerta("Nenhum projeto encontrado", "Erro ao encontrar projeto");
     }
-    }
+}
 
     @FXML
     public void gotoReport() throws IOException{
         propriedades.ScreenGuider("tela-progressoPC.fxml", "Go back to report screen");
     }
-
-   
 
     public int getProject() throws SQLException{
 
@@ -59,7 +56,6 @@ public class ExpandirMetaController {
         System.out.println("ID do projeto selecionado: " + projectId);
 
         return projectId;
-
      }
 
      public void loadProjectValues() throws SQLException{
@@ -75,7 +71,6 @@ public class ExpandirMetaController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
     String prazoFormatado = dateline.format(formatter);
     lblCurrentDate.setText(prazoFormatado);
-
   }
 
   @FXML
@@ -95,5 +90,4 @@ public class ExpandirMetaController {
           System.err.println("Erro ao atualizar o projeto: " + e.getMessage());
       }
   }
-  
 }

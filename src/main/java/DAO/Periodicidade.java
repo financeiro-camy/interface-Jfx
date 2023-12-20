@@ -45,6 +45,4 @@ public class Periodicidade {
          public String toString() {
         return "Periodicidade [id=" + id + ", idUsuario=" + idUsuario + ", nome=" + nome + "]";
     }
-    }
-    
-
+}

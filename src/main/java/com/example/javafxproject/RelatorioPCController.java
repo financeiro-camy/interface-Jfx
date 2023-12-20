@@ -29,7 +29,6 @@ public class RelatorioPCController {
   private int selectedAccountId = -1;
   private int selectedProjectId = -1;
 
-
   @FXML
   private TextField txfQuantia;
 
@@ -52,7 +51,6 @@ public class RelatorioPCController {
             loadProjectName();
         }
     }
-
 
   public void carregarContas() throws SQLException {
         ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
@@ -86,7 +84,6 @@ public class RelatorioPCController {
         });
     }
 
-
   public void loadProjectName() throws SQLException{
 
     selectedProjectId = getProject();   
@@ -106,7 +103,6 @@ public class RelatorioPCController {
     return selectedProjectId;
 
    }
-
 
   @FXML
   public void InserirValor() throws SQLException, IOException {
@@ -160,7 +156,7 @@ if (selectedAccountId != -1 && selectedProjectId != -1) {
         limparCampos();
     }
 } else {
-    System.out.println("Deu erro, amigão");
+    System.out.println("Deu erro, amigão"); //trocar esse amigão porque soa informal demais, carlos!! hahahahaha
 }          
   }
 

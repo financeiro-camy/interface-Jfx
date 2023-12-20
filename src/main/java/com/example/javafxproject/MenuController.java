@@ -87,7 +87,6 @@ public class MenuController {
         lblweeklywaste.setAlignment(Pos.CENTER);
 
     }
-
    
      public void carregarContas() throws SQLException {
         ContasDinheiroDAO contasDAO = new ContasDinheiroDAO();
@@ -126,7 +125,6 @@ public class MenuController {
         });
     }
 
-
      public void atualizarSaldoContaSelecionada() throws SQLException {
         if (selectedAccountId != -1) {
             HistoricoSaldosDAO historicoSaldosDAO = new HistoricoSaldosDAO(); 
@@ -143,7 +141,6 @@ public class MenuController {
             lblweeklywaste.setText(String.format("R$ %.2f", waste));
       }
     }    
-
 
      public void carregarProjetos() throws SQLException{
        ProjetoCofrinhoDAO projetoDAO = new ProjetoCofrinhoDAO();
@@ -185,7 +182,6 @@ public class MenuController {
         });
     }
 
-
     @FXML
     public void realizarLogout() throws IOException{
         
@@ -211,5 +207,4 @@ public class MenuController {
     public void adicionarConta() throws IOException{
         propriedades.ScreenGuider("tela-contasdinheiro3.fxml","Cadastrar uma nova conta");
     }
-
 }
